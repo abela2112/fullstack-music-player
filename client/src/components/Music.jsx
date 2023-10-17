@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setFavoriteSongs } from '../redux/features/user'
 import axios from 'axios'
 import MenuButton from './MenuButton'
+import { userFavoritesAPI } from '../api/userApi'
 
 
 const Music = ({ song, i }) => {
@@ -22,18 +23,14 @@ const Music = ({ song, i }) => {
         setId(id)
     }
     const handleFavorites = async (id) => {
-        const { data } = await axios.post(`http://localhost:5000/api/users/favorites`, { id }, {
-            headers: {
-                Authorization: "Bearer " + token,
-            },
-        })
+        const { data } = await userFavoritesAPI(id)
         dispatch(setFavoriteSongs(data))
     }
     return (
         <Box my={2} bg={'#F2F5F5'} p={[0, 2]} justifyContent="space-between" width={['100%', "800px"]} alignItems="center">
             <Box justifyContent="space-evenly" alignItems="center" >
                 <PlayPause song={song} i={i} />
-                <Img width={'50px'} src={`http://localhost:5000/${song?.img}`} alt='songphoto' borderRadius={10} />
+                <Img width={'50px'} src={`${import.meta.env.VITE_BASE_URL}/${song?.img}`} alt='songphoto' borderRadius={10} />
                 <Box flexDirection='column' ml={2} >
                     <Span fontSize={'1.2rem'} fontWeight={'bold'} p={2} >{song?.title}</Span>
                     <Span>{song?.artist}</Span>

@@ -6,6 +6,7 @@ import axios from 'axios'
 import { setFavoriteSongs } from '../redux/features/user'
 import Loader from '../components/Loader'
 import { Box } from '../components/Styles'
+import { getUserFavoritesSongAPI } from '../api/userApi'
 
 const FavoriteSongs = () => {
     const dispatch = useDispatch()
@@ -14,13 +15,8 @@ const FavoriteSongs = () => {
     const favoriteSongs = useSelector(state => state.user?.user?.likedSongs)
     useEffect(() => {
         setIsLoading(true)
-        axios.get(`http://localhost:5000/api/users/favorites/${user?._id}`, {
-            headers: {
-                Authorization: "Bearer " + token,
-            },
-        }).then(({ data }) => {
+        getUserFavoritesSongAPI(user?._id).then(({ data }) => {
             console.log(data);
-
             dispatch(setFavoriteSongs(data))
             setIsLoading(false)
         })

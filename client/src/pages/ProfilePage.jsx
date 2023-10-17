@@ -5,13 +5,13 @@ import { useSelector } from 'react-redux';
 const ProfilePage = () => {
     const { user } = useSelector((state) => state.user);
     const [isEdit, setIsEdit] = useState(false)
-    console.log(user)
+    const baseUrl = import.meta.env.VITE_BASE_URL
     return (
         <Box width='full' justifyContent={'start'} >
             <Box flexDirection='column' >
                 <Box justifyContent='center' my={2} >
 
-                    <Img width={'200px'} src={`http://localhost:5000/${user?.picture}`} borderRadius='50%' />
+                    <Img width={'200px'} src={`${baseUrl}${user?.picture}`} borderRadius='50%' />
 
                 </Box>
                 <Box flexDirection={["column", "row"]} py={2}>

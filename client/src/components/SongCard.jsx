@@ -11,6 +11,7 @@ import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { BsThreeDots } from 'react-icons/bs'
 import Modal from './Modal'
 import MenuButton from './MenuButton'
+import { userFavoritesAPI, userPlaylistsAPI } from '../api/userApi'
 //import { setModalOpen } from '../redux/features/songs'
 
 
@@ -31,19 +32,11 @@ const SongCard = ({ song, i }) => {
         setIsModalOpen(false);
     };
     const handleFavorites = async (id) => {
-        const { data } = await axios.post(`http://localhost:5000/api/users/favorites`, { id }, {
-            headers: {
-                Authorization: "Bearer " + token,
-            },
-        })
+        const { data } = await userFavoritesAPI(id)
         dispatch(setFavoriteSongs(data))
     }
     const handlePlaylist = async (id) => {
-        const { data } = await axios.post(`http://localhost:5000/api/users/playlist`, { id }, {
-            headers: {
-                Authorization: "Bearer " + token,
-            },
-        })
+        const { data } = await userPlaylistsAPI(id)
         dispatch(setPlaylist(data))
     }
 
@@ -54,7 +47,7 @@ const SongCard = ({ song, i }) => {
                 <Box position='absolute' inset='0' justifyContent='center' alignItems='center' width='full' height='full'>
                     <PlayPause song={song} i={i} />
                 </Box>
-                <Img src={`http://localhost:5000/${song?.img}`} borderRadius={10} alt='songphoto' />
+                <Img src={`${import.meta.env.VITE_BASE_URL}/${song?.img}`} borderRadius={10} alt='songphoto' />
 
             </Box>
             <Box justifyContent='space-between' mt={3} position='relative'>

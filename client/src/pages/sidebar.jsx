@@ -94,13 +94,14 @@ const Sidebar = () => {
                         navItems.map(({ text, icon }) => {
                             if (!icon) return (<Typography key={text} textAlign='start' color="#909090" fontFamily='Nunito' fontSize='1.5rem' fontWeight='400'>{text}</Typography>)
                             else {
-                                let lcText = text.trim()
+                                let lcText = text.toLowerCase()
 
                                 return (
-                                    <FlexNavLink className={({ isActive }) => isActive ? 'active' : ''} key={text} to={`/home/${lcText.toLowerCase()}`}  >
+                                    <FlexNavLink className={({ isActive }) => isActive ? 'active' : ''} key={text} to={`/home/${lcText}`}  >
                                         {icon}
                                         <Typography
-                                            fontSize="1.2rem">{text}</Typography>
+                                            fontSize="1.2rem">{text}
+                                        </Typography>
                                     </FlexNavLink>
                                 )
                             }
