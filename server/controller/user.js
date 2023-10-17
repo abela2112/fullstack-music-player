@@ -155,9 +155,9 @@ const getFavoriteSongs=async (req,res)=>{
   const {userId}=req.params
   const user=await User.findById(userId)
  
-  const favoriteSong=await Promise.all(
-    user.likedSongs.map((id)=> Song.findById(id))
-  )
+  const favoriteSong = await Promise.all(
+    user?.likedSongs.map((id) => Song.findById(id))
+  );
 
   res.status(200).json(favoriteSong)
   
