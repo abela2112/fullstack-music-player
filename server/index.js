@@ -80,8 +80,7 @@ app.get("/api", (req, res) => {
   res.json({ success: true, message: "welcome" });
 });
 const start = async () => {
-  
-  await mongoose.connect(process.env.MONGODB_URL)
+  await mongoose.connect(process.env.MONGODB_URL);
   app.listen(port, () => {
     console.log(`listening on ${port}`);
   });
