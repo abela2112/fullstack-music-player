@@ -22,7 +22,7 @@ const Player = ({ activeSong, isPlaying, volume, seekTime, onEnded, onTimeUpdate
 
   return (
     <audio
-      src={`http://localhost:5000/${activeSong?.song}`}
+      src={`${import.meta.env.VITE_BASE_URL}${activeSong?.song}`}
       ref={ref}
       loop={repeat}
       onEnded={onEnded}
