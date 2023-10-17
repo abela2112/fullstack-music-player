@@ -31,6 +31,7 @@ app.use("/api/albums", auth, albumRoute);
 app.use("/api/artists", auth, artistRoute);
 app.use("/api/artists/new", uploadMiddleware.single('profileImage'), createArtist);
 app.use('/api/user/signup',uploadMiddleware.single('profileImage'),createUser)
+
 app.use(
   "/api/song/create",
   uploadMiddleware.fields([
@@ -75,6 +76,10 @@ app.use(
     }
    }
 );
+
+app.get("/api", (req, res) => {
+  res.json({ success: true, message: "welcome" });
+});
 const start = async () => {
   
   await mongoose.connect(process.env.MONGODB_URL)
