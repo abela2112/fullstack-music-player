@@ -19,9 +19,9 @@ const { createArtist } = require("./controller/artist");
 
 const uploadMiddleware = multer({ dest: "uploads/" });
 const app = express();
-
+const origin = process.env.BASE_URL;
 const port = process.env.PORT || 5000;
-app.use(cors({ origin: "http://127.0.0.1:5173" }));
+app.use(cors({ origin: origin }));
 app.use(express.json());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use("/api/users", userRoute);
