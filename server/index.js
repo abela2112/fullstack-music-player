@@ -19,9 +19,9 @@ const { createArtist } = require("./controller/artist");
 
 const uploadMiddleware = multer({ dest: "uploads/" });
 const app = express();
-const origin = process.env.BASE_URL;
+
 const port = process.env.PORT || 5000;
-app.use(cors({ origin: origin }));
+app.use(cors({ origin: 'https://drop-music-player-1.onrender.com/' }));
 app.use(express.json());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use("/api/users", userRoute);
