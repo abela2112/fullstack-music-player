@@ -38,7 +38,7 @@ const Header = () => {
                             borderRadius={'50%'}
                             border={'2px dotted red'}
                             p={2}
-                            src={`${import.meta.env.VITE_BASE_URL}${user?.picture}`}
+                            src={`${import.meta.env.VITE_BASE_URL}/${user?.picture}`}
                             alt="profile"
                         />
                     </Box>
