@@ -64,7 +64,7 @@ app.get("/api", (req, res) => {
 app.use(notFoundMiddleware);
 app.use(errorHandleMiddleware);
 const start = async () => {
-  await mongoose.connect("mongodb://localhost:27017/spotify");
+  await mongoose.connect(process.env.MONGODB_URL);
   app.listen(port, () => {
     console.log(`listening on ${port}`);
   });
