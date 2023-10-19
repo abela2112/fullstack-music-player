@@ -36,7 +36,7 @@ app.use(cors());
 
 //routes
 app.use("/api/users", userRoute);
-app.use("/api/songs", uploadMiddleware.any(), songRoute);
+app.use("/api/songs", songRoute);
 app.use("/api/google", googleRoute);
 app.use("/api/albums", auth, albumRoute);
 app.use("/api/artists", auth, artistRoute);
