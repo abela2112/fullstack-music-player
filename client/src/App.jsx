@@ -6,7 +6,6 @@ import HomePage from './pages/HomePage'
 import { Global, css } from '@emotion/react';
 import { useSelector } from 'react-redux';
 import VerifyEmail from './pages/VerifyEmail';
-import EmailVarificationPage from './pages/EmailVarificationPage';
 
 const GlobalStyles = () => (
   <Global
@@ -45,7 +44,7 @@ function App() {
         <Route index element={isAuth ? <Navigate to={'/home'} /> : <RegisterPage />} />
         <Route path='/home/*' element={isAuth ? <HomePage /> : <Navigate to={"/"} />} />
         <Route path='/verifyEmail' element={<VerifyEmail />} />
-        <Route path='/verify/:userId/:token' element={<EmailVarificationPage />} />
+
 
       </Routes>
 

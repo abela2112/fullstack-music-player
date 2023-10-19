@@ -36,7 +36,7 @@ router.get('/playlist/:userId',  auth,getPlaylists)
 router.delete("/:id", [validObjectId, admin], deleteUser);
 
 // verify email address
-router.get('/:id/verify/:token',verifyEmail)
+router.post("/verify", verifyEmail);
 
 // get user created songs
 router.get('/songs/:userId',auth,getUserSongs)

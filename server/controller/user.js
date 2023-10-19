@@ -31,13 +31,13 @@ const createUser = async (req, res) => {
     token: crypto.randomBytes(32).toString("hex"),
   }).save();
 
-  const url = `${process.env.BASE_URL}/verify/${user._id}/${token.token}`;
+  const verificationCode = `${token.token}`;
   await sendEmail(
     user?.email,
     "verify your Email",
     ` Hi there
-  Thank you for signing up for Drop Music player. Click on the link below to verify your email:
-  ${url}`
+  Thank you for signing up for Drop Music player. Copy  the verification code  below to verify your email:
+  ${verificationCode}`
   );
   user.password = undefined;
   user.__v = undefined;
@@ -188,13 +188,13 @@ const getPlaylists = async (req, res) => {
 };
 
 const verifyEmail = async (req, res) => {
-  const { id, token } = req.params;
-  const user = await User.findById(id);
+  const { email, verificationCode } = req.body;
+  const user = await User.findOne({ email: email });
   if (!user) throw new NotFoundError("User not found  invalid link");
 
   const verifyToken = await verificationToken.findOne({
     userId: user._id,
-    token: token,
+    token: verificationCode,
   });
   if (!verifyToken) throw new BadRequestError("invalid link");
   await User.updateOne({ _id: user._id, email_verified: true });
