@@ -35,13 +35,15 @@ const FormPage = () => {
             if (password !== confirmPassword) {
                 throw new Error("password doesn't match");
             }
-            createUserAPI(formData).then(({ data }) => {
+            const data = await createUserAPI(formData)
+            console.log(data);
                 navigate('/verifyEmail')
-            }).catch((err) => {
-                throw new Error(err.response?.data?.msg)
-            })
+
+
+
         } catch (error) {
-            dispatch(setError(error?.message))
+            console.log(error);
+            //dispatch(setError(error?.message))
         }
     };
 
