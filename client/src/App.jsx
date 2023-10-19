@@ -25,7 +25,7 @@ const GlobalStyles = () => (
 
 function App() {
   const token = useSelector(state => state.user?.token) || window.localStorage.getItem('token')
-  axios.defaults.baseURL = 'http://localhost:5000'
+  axios.defaults.baseURL = import.meta.env.VITE_BASE_URL
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   //console.log(import.meta.env.VITE_BASE_URL)
 
@@ -44,7 +44,7 @@ function App() {
         <Route index element={isAuth ? <Navigate to={'/home'} /> : <RegisterPage />} />
         <Route path='/home/*' element={isAuth ? <HomePage /> : <Navigate to={"/"} />} />
         <Route path='/verifyEmail' element={<VerifyEmail />} />
-        <Route path='/verify/:userId/:token' element={<VerifyEmail />} />
+        <Route path='/verify/:userId/:token' element={<EmailVarificationPage />} />
 
       </Routes>
 
