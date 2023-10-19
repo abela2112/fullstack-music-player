@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
-import { Box, Button, FlexNavLink, Form, Heading, Input, Label, P } from '../../components/Styles'
-import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
-import { registerUser, setUserLogin } from '../../redux/features/user';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { Box, Button, Form, Heading, Input, Label, P } from '../../components/Styles'
+
+import { useNavigate } from 'react-router-dom';
+import { registerUser, setError, setUserLogin } from '../../redux/features/user';
+import { useDispatch, useSelector } from 'react-redux';
 
 const FormPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch()
+
     const [pageType, setPageType] = useState("login");
     const isLogin = pageType === "login";
     const isRegister = pageType === "register";
@@ -15,52 +16,49 @@ const FormPage = () => {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [profileImage, setProfileImage] = useState("");
+    const [picture, setPicture] = useState("");
+
+    const { errorMessage, successMessage, isLoading } = useSelector((state) => state.user)
 
 
 
     const handleRegister = async (e) => {
 
-        const formData = new FormData();
-        formData.set("name", name);
-        formData.set("password", password);
-        formData.set("email", email);
-        formData.set("profileImage", profileImage[0]);
-        if (password !== confirmPassword) {
-            throw new Error("password doesn't match");
+        try {
+            const formData = new FormData();
+            formData.set("name", name);
+            formData.set("password", password);
+            formData.set("email", email);
+            formData.set("picture", picture[0]);
+            if (password !== confirmPassword) {
+                throw new Error("password doesn't match");
+            }
+            dispatch(registerUser(formData))
+            navigate('/verifyEmail')
+
+        } catch (error) {
+            dispatch(setError(error?.message))
         }
-        // const { data } = await axios.post(
-        //     "http://localhost:5000/api/user/signup",
-        //     formData,
-        //     {
-        //         headers: { "Content-Type": "multipart/form-data" },
-        //     }
-        // );
-        console.log(formData)
-        dispatch(registerUser(formData))
-        setPageType('login')
     };
 
     const handleLogin = async (e) => {
-
         try {
-
             dispatch(setUserLogin({ email, password }))
             navigate('/home')
             console.log('login here')
 
         } catch (error) {
-            console.error(error)
+            dispatch(setError(error.message))
         }
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (isLogin) {
-            await handleLogin()
+            handleLogin()
         }
         if (isRegister) {
-            await handleRegister()
+            handleRegister()
         }
     }
     return (
@@ -105,6 +103,7 @@ const FormPage = () => {
                 <Input
                     type="password"
                     placeholder="password"
+                    autoComplete='none'
                     px={3}
                     py={3}
                     borderRadius={5}
@@ -137,7 +136,7 @@ const FormPage = () => {
                             type="file"
                             px={3}
                             py={2}
-                            onChange={(e) => setProfileImage(e.target.files)}
+                            onChange={(e) => setPicture(e.target.files)}
                         />
                     </Box>
                 </>
@@ -158,7 +157,8 @@ const FormPage = () => {
                     outline="none"
                     bg="#EF233C"
                     color="white"
-
+                    disabled={isLoading}
+                    className={isLoading ? "loading" : ''}
 
                 >
                     {isLogin ? "Login" : "Register"}
@@ -176,8 +176,10 @@ const FormPage = () => {
                 {isLogin ? "Don't have an account Register Here" : "have an account Login here"
                 }
             </P>
-
-
+            {
+                errorMessage && <p className='error'>{errorMessage}</p>
+            }
+            {successMessage && <p>{successMessage}</p>}
         </Form>
     )
 }

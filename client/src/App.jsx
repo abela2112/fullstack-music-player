@@ -5,6 +5,7 @@ import axios from 'axios';
 import HomePage from './pages/HomePage'
 import { Global, css } from '@emotion/react';
 import { useSelector } from 'react-redux';
+import VerifyEmail from './pages/VerifyEmail';
 
 const GlobalStyles = () => (
   <Global
@@ -24,9 +25,9 @@ const GlobalStyles = () => (
 
 function App() {
   const token = useSelector(state => state.user?.token) || window.localStorage.getItem('token')
-  axios.defaults.baseURL = import.meta.env.VITE_BASE_URL
+  axios.defaults.baseURL = 'http://localhost:5000'
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  console.log(import.meta.env.VITE_BASE_URL)
+  //console.log(import.meta.env.VITE_BASE_URL)
 
   //const [isDarkMode, setIsDarkMode] = useState(false);
   // const [isUserLoggedIn, setIsLoggedInUser] = useState(false || window.localStorage.getItem('token'))
@@ -42,6 +43,9 @@ function App() {
       <Routes>
         <Route index element={isAuth ? <Navigate to={'/home'} /> : <RegisterPage />} />
         <Route path='/home/*' element={isAuth ? <HomePage /> : <Navigate to={"/"} />} />
+        <Route path='/verifyEmail' element={<VerifyEmail />} />
+        <Route path='/verify/:userId/:token' element={<VerifyEmail />} />
+
       </Routes>
 
     </>

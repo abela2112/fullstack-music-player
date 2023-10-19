@@ -5,48 +5,63 @@ const {Song}=require("../model/song");
 const sendEmail=require('../utils/sendEmail')
 const verificationToken=require('../model/token')
 const crypto=require('crypto');
+const { NotFoundError, BadRequestError } = require("../errors");
+const { StatusCodes } = require("http-status-codes");
 
 const createUser = async (req, res) => {
-  const { email, password, name,profileImage } = req.body;
-  console.log(req.body);
-  console.log(req.file)
+  const { email, password, name } = req.body;
 
-try {
   const { error } = validate(req.body);
-  if (error) {
-    return res.status(403).json({ message: error.details[0].message });
-  }
-  const {originalname,path}=req.file
+  if (error) throw new BadRequestError(error.details[0].message);
+
+  if (!req.file) throw new BadRequestError("please enter the required file");
+  const { originalname, path } = req.file;
   const imagExt = originalname.split(".")[1];
   const imagNewpath = path + "." + imagExt;
   fs.renameSync(path, imagNewpath);
 
-  const user = await User.create({email, password, name,picture:imagNewpath });
-const token=await new verificationToken
-({
-  userId:user._id,
-  token:crypto.randomBytes(32).toString("hex")
-}).save();
+  const user = await User.create({
+    email,
+    password,
+    name,
+    picture: imagNewpath,
+  });
+  const token = await new verificationToken({
+    userId: user._id,
+    token: crypto.randomBytes(32).toString("hex"),
+  }).save();
 
-const url=`${process.env.BASE_URL}/users/${user._id}/verify/${token.token}`
-await sendEmail(user?.email,"verify Email",url)
+  const url = `${process.env.BASE_URL}/verify/${user._id}/${token.token}`;
+  await sendEmail(
+    user?.email,
+    "verify your Email",
+    ` Hi there
+  Thank you for signing up for Drop Music player. Click on the link below to verify your email:
+  ${url}`
+  );
   user.password = undefined;
   user.__v = undefined;
-  res.status(200).json(user);
-} catch (error) {
-  console.log(error);
-}
+  res
+    .status(StatusCodes.CREATED)
+    .json({ data: user, message: "Registered Successfully" });
 };
 
 const signIn = async (req, res) => {
   const { email, password } = req.body;
+  console.log(email, password);
+  if (!email || !password)
+    throw new BadRequestError("please enter a valid email");
   const user = await User.findOne({ email: email });
   if (!user) {
-    return res.status(400).json({ message: "User not found" });
+    // return res.status(400).json({ message: "User not found" });
+    throw new NotFoundError(`user not found`);
   }
-  const validUser =bycryptjs.compare(password, user.password);
+  const validUser = await bycryptjs.compare(password, user.password);
+
   if (!validUser) {
-    return res.status(400).json({ message: "invalid password" });
+    //return res.status(400).json({ message: "invalid password" });
+
+    throw new BadRequestError(`invalid password`);
   }
   const token = user.generateAuthToken();
   user.password = undefined;
@@ -61,13 +76,16 @@ const signIn = async (req, res) => {
 //get all users
 const getAllUsers = async (req, res) => {
   const user = await User.find().select("-password -__v");
-  res.status(200).json({ data: user });
+  res.status(StatusCodes.OK).json({ data: user });
 };
+
 // get a user by id
 const getUser = async (req, res) => {
   const { id } = req.params;
   const user = await User.findById(id).select("-password -__v");
-  res.status(200).json({ data: user });
+
+  if (!user) throw new NotFoundError("user not found");
+  res.status(StatusCodes.OK).json({ data: user });
 };
 // update a user
 
@@ -93,7 +111,7 @@ const updateRole = async (req, res) => {
   try {
     const {
       params: { id },
-      body: { role},
+      body: { role },
     } = req;
 
     const userRole = role === "Admin" ? true : false;
@@ -109,94 +127,81 @@ const updateRole = async (req, res) => {
   }
 };
 
-const addFavoriteSongs=async(req,res)=>{
-  const {id}=req.body
-  const song=await Song.findById(id)
-  
-  const user=await User.findById(req.user?.id)
+const addFavoriteSongs = async (req, res) => {
+  const { id } = req.body;
+  const song = await Song.findById(id);
 
-  if(user.likedSongs.includes(id)){
-    user.likedSongs=user.likedSongs.filter((songId)=>songId!==id)
+  const user = await User.findById(req.user?.id);
 
+  if (user.likedSongs.includes(id)) {
+    user.likedSongs = user.likedSongs.filter((songId) => songId !== id);
+  } else {
+    user.likedSongs.push(id);
   }
-  else{
-    user.likedSongs.push(id)
-  }
-  await user.save()
-  const favoriteSong=await Promise.all(
-    user.likedSongs.map((id)=> Song.findById(id))
-  )
-  
-  res.status(200).json(favoriteSong)
-}
+  await user.save();
+  const favoriteSong = await Promise.all(
+    user.likedSongs.map((id) => Song.findById(id))
+  );
 
-const addToPlaylist=async(req,res)=>{
-  const {id}=req.body
-  console.log('songid',id)
-  const song=await Song.findById(id)
-  
-  const user=await User.findById(req.user?.id)
+  res.status(StatusCodes.OK).json(favoriteSong);
+};
 
-  if(user.playlist.includes(id)){
-    user.playlist=user.playlist.filter((songId)=>songId!==id)
+const addToPlaylist = async (req, res) => {
+  const { id } = req.body;
+  console.log("songid", id);
+  const song = await Song.findById(id);
 
+  const user = await User.findById(req.user?.id);
+
+  if (user.playlist.includes(id)) {
+    user.playlist = user.playlist.filter((songId) => songId !== id);
+  } else {
+    user.playlist.push(id);
   }
-  else{
-    user.playlist.push(id)
-  }
-  await user.save()
-  const Playlist=await Promise.all(
-    user.playlist.map((id)=> Song.findById(id))
-  )
-  
-  res.status(200).json(Playlist)
-}
-const getFavoriteSongs=async (req,res)=>{
-  const {userId}=req.params
-  const user=await User.findById(userId)
- 
+  await user.save();
+  const Playlist = await Promise.all(
+    user.playlist.map((id) => Song.findById(id))
+  );
+
+  res.status(200).json(Playlist);
+};
+const getFavoriteSongs = async (req, res) => {
+  const { userId } = req.params;
+  const user = await User.findById(userId);
+
   const favoriteSong = await Promise.all(
     user?.likedSongs.map((id) => Song.findById(id))
   );
 
-  res.status(200).json(favoriteSong)
-  
-}
+  res.status(200).json(favoriteSong);
+};
 
+const getPlaylists = async (req, res) => {
+  const { userId } = req.params;
+  const user = await User.findById(userId);
+  console.log("user", user);
+  const playlist = await Promise.all(
+    user.playlist.map((id) => Song.findById(id))
+  );
+  console.log("playlist", playlist);
+  res.status(200).json(playlist);
+};
 
-const getPlaylists=async (req,res)=>{
-  const {userId}=req.params
-  const user=await User.findById(userId)
-  console.log('user',user)
-  const playlist=await Promise.all(
-    user.playlist.map((id)=> Song.findById(id))
-  )
-  console.log('playlist',playlist)
-  res.status(200).json(playlist)
-  
-}
+const verifyEmail = async (req, res) => {
+  const { id, token } = req.params;
+  const user = await User.findById(id);
+  if (!user) throw new NotFoundError("User not found  invalid link");
 
-const verifyEmail=async (req, res) => {
-  const {id,token} = req.params
-  const user=await User.findById(id)
-  if(!user) {
-    res.status(400).json({message:"User not found! invalid link"})
-  }
+  const verifyToken = await verificationToken.findOne({
+    userId: user._id,
+    token: token,
+  });
+  if (!verifyToken) throw new BadRequestError("invalid link");
+  await User.updateOne({ _id: user._id, email_verified: true });
+  verifyToken.remove();
 
-  const verifyToken=await verificationToken.findOne({
-    userId:user._id,
-    token:token
-  })
-  if(!verifyToken){
-    res.status(400).json({message:"invalid link"})
-  }
-
-  await User.updateOne({_id:user._id,email_verified:true })
-  verifyToken.remove()
-
-  res.status(200).json({message:"email verified successfully"})
-
-}
+  res.status(200).json({ message: "email verified successfully" });
+};
 
 const getUserSongs=async(req,res)=>{
   const {userId}=req.params;

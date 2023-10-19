@@ -4,13 +4,9 @@ const header = { "Content-Type": "multipart/form-data" };
 export const getUsersAPI = async () => axios.get("/api/users");
 export const getUserByIdAPI = async (id) => axios.get(`/api/users/${id}`);
 export const createUserAPI = async (user) => {
-  try {
-    axios.post(`//api/user/signup`, user, {
-      headers: header,
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  return axios.post(`/api/user/signup`, user, {
+    headers: header,
+  });
 };
 export const loginUserAPI = async (user) =>
   axios.post(`/api/users/login`, user);
@@ -28,3 +24,6 @@ export const getUserPlayListsAPI = async (id) =>
 
 export const getUserFavoritesSongAPI = async (id) =>
   axios.get(`/api/users/favorites/${id}`);
+
+export const verifyEmail = async (userId, token) =>
+  axios.get(`/api/users/${userId}/verify/${token}`);

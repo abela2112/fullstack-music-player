@@ -6,6 +6,8 @@ export default {
     blue: "#007ce0",
     navy: "#004175",
     royalBlue: "#5C67DE",
+    red: "#EF233C",
+    gray: "#909090",
   },
   sizes: {
     1: "100px",

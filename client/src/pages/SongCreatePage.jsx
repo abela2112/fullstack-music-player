@@ -17,6 +17,7 @@ const SongCreatePage = () => {
     const [country, setCountry] = useState("");
     const [coverImage, setCoverImage] = useState("");
     const [music, setMusic] = useState("");
+    const { isLoading } = useSelector(state => state.songs)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -28,6 +29,7 @@ const SongCreatePage = () => {
         formData.set("country", country);
         formData.set("song", music[0]);
         formData.set("img", coverImage[0]);
+
         try {
             dispatch(createSong(formData))
             //navigate('/home')
@@ -187,6 +189,8 @@ const SongCreatePage = () => {
                             justifyContent="center"
                             bg="#f0354b"
                             color="white"
+                            disabled={isLoading}
+                            className={isLoading ? "loading" : ''}
                         >
                             Submit
                         </Button>
