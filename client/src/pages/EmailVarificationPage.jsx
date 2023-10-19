@@ -25,7 +25,8 @@ const EmailVarificationPage = () => {
     if (isLoading) return <Loader />
     return (
         <>
-            {isVerified && <Box width='full' minHeight='screen' justifyContent='center' alignItems='center'>
+            {isVerified &&
+                <Box width='full' minHeight='screen' justifyContent='center' alignItems='center'>
                 <Typography>verified successfully</Typography>
                 <FlexNavLink to='/'>login</FlexNavLink>
             </Box>}
