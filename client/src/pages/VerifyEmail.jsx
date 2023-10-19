@@ -10,7 +10,7 @@ const VerifyEmail = () => {
     const [email, setEmail] = useState('')
     const [verificationCode, setVerificationCode] = useState('')
     const handleVerify = async (e) => {
-        e.preventDefal
+        e.preventDefault();
         verifyEmail(email, verificationCode).then(({ data }) => {
             setIsVerified(true)
             navigate('/')

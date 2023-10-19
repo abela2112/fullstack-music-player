@@ -25,5 +25,5 @@ export const getUserPlayListsAPI = async (id) =>
 export const getUserFavoritesSongAPI = async (id) =>
   axios.get(`/api/users/favorites/${id}`);
 
-export const verifyEmail = async (email, verificationCode) =>
+export const verifyEmail = (email, verificationCode) =>
   axios.post(`/api/users/verify`, { email, verificationCode });
