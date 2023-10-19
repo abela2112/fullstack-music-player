@@ -11,7 +11,7 @@ const router = express.Router();
 router.get("/", getAllSong);
 router.get("/:id",[validObjectId, auth], getSingleSong);
 router.post("/create", auth, createSong);
-router.patch("/:id", [validObjectId, auth], updateSong);
+router.put("/:id", [validObjectId, auth], updateSong);
 router.delete("/:id", [validObjectId, auth], deleteSong);
 
 

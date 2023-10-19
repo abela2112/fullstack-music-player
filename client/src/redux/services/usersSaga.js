@@ -8,23 +8,34 @@ import {
 import {
   getPlayLists,
   registerUser,
+  registerUserError,
+  registerUserSuccess,
+  setError,
   setUserLogin,
+  setUserLoginError,
+  setUserLoginSuccess,
   updateUser,
 } from "../features/user";
 
 function* workRegisterUser({ payload }) {
-  console.log(payload);
-  const data = yield createUserAPI(payload);
-  console.log(data);
-  // yield put(registerUser(data));
+  try {
+    console.log(payload);
+    const data = yield createUserAPI(payload);
+    yield put(registerUserSuccess(data));
+  } catch (error) {
+    yield put(registerUserError(error?.response?.data));
+    // yield put(setError(error?.response?.data));
+  }
 }
 
 function* workSignInUser(action) {
   try {
     const data = yield loginUserAPI(action.payload);
-    yield put(setUserLogin(data));
+    yield put(setUserLoginSuccess(data));
   } catch (error) {
     console.log(error);
+    yield put(setUserLoginError(error?.response?.data));
+    //yield put(setError(error));
   }
 }
 

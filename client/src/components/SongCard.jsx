@@ -47,7 +47,7 @@ const SongCard = ({ song, i }) => {
                 <Box position='absolute' inset='0' justifyContent='center' alignItems='center' width='full' height='full'>
                     <PlayPause song={song} i={i} />
                 </Box>
-                <Img src={`${import.meta.env.VITE_BASE_URL}/${song?.img}`} borderRadius={10} alt='songphoto' />
+                <Img src={`${import.meta.env.VITE_BASE_URL}${song?.img}`} borderRadius={10} alt='songphoto' />
 
             </Box>
             <Box justifyContent='space-between' mt={3} position='relative'>

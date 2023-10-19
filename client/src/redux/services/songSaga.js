@@ -1,10 +1,14 @@
 import { takeEvery, put, call } from "redux-saga/effects";
 import {
   createSong,
+  createSongSuccess,
   deleteSong,
   getSongsFailure,
+  getSongsFetch,
   getSongsSuccess,
   updateSong,
+  updateSongFailure,
+  updateSongSuccess,
 } from "../features/songs";
 import {
   createSongAPI,
@@ -16,6 +20,7 @@ import {
 function* workGetSongFetch() {
   try {
     const songs = yield getSongsAPI();
+
     yield put(getSongsSuccess(songs));
   } catch (error) {
     yield put(getSongsFailure());
@@ -26,12 +31,13 @@ function* workGetSongFetch() {
 //   const songs = yield getSongByIdAPI(id);
 //   yield put(getSongsSuccess(songs));
 // }
-function* workCreateSong({ payload }) {
+function* workCreateSong(action) {
   try {
-    console.log(payload);
-    const data = yield createSongAPI(payload);
-    console.log(data);
-    // yield put(createSong(data?.data));
+    console.log(action.payload);
+    const data = yield createSongAPI(action.payload);
+
+    yield put(createSongSuccess(data?.data));
+    yield put(getSongsFetch());
   } catch (error) {
     console.log(error);
   }
@@ -40,16 +46,17 @@ function* workCreateSong({ payload }) {
 function* workUpdateSong({ payload: { songId, formData } }) {
   try {
     const data = yield updateSongAPI(songId, formData);
-
-    yield put(updateSong(data?.data));
+    console.log(data);
+    yield put(updateSongSuccess(data?.data));
   } catch (error) {
     console.log(error);
+    //yield put(updateSongFailure());
   }
 }
 
 function* workDeleteSong(action) {
   const data = yield deleteSongByIdAPI(action.payload);
-  console.log(data);
+  yield put(deleteSong(action.payload));
 }
 
 function* watchSongSaga() {

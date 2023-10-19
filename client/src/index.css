@@ -76,3 +76,41 @@
     line-height: 30px;
     text-align: center;
   }
+.error{
+  padding: 1rem;
+  width: 100%;
+  color: red;
+  background-color: rgba(212 ,132, 132 ,0.8);;
+}
+
+
+  button.loading {
+position: relative;
+  }
+  button.loading::before {
+    position: absolute;
+    
+    right: 20%;
+   z-index: 10;
+    margin-right: 0.5rem/* 8px */;
+    height: 1rem/* 16px */;
+    width: 1rem/* 16px */;
+    border-radius: 9999px;
+    border-width: 2px;
+    animation: spin 2s linear infinite;
+    content: "";
+    border: 6px solid #eee8e8;
+    border-top-color: #eee8e8;
+    border-left-color: #eee8e8;
+    border-bottom-color: #eee8e8;
+    border-right-color: #eee8e8;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

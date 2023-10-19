@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getSongByIdAPI, updateSongAPI } from '../api/songApi';
 import { Heading, Form, Input, Button, Box, Label } from '../components/Styles';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { updateSong } from '../redux/features/songs';
+import SpinLoader from '../components/SpinLoader';
 
 const EditSongs = () => {
     const { songId } = useParams()
+    const { isLoading } = useSelector(state => state.songs)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [title, setTitle] = useState("");
@@ -19,7 +21,8 @@ const EditSongs = () => {
 
 
     useEffect(() => {
-        getSongByIdAPI(songId).then(({ data }) => {
+        getSongByIdAPI(songId)
+            .then(({ data }) => {
             setTitle(data?.data?.title)
             setArtist(data?.data?.artist)
             setGenre(data?.data?.genre)
@@ -32,6 +35,7 @@ const EditSongs = () => {
 
     const handleEdit = async (e) => {
         e.preventDefault();
+
         const formData = new FormData();
         formData.set("title", title);
         formData.set("artist", artist);
@@ -40,7 +44,9 @@ const EditSongs = () => {
         formData.set("country", country);
         formData.set("song", music[0]);
         formData.set("img", coverImage[0]);
+
         try {
+            console.log(title, artist, genre, country, language, genre)
             dispatch(updateSong({ songId, formData }));
 
         } catch (error) {
@@ -61,7 +67,7 @@ const EditSongs = () => {
         >
             <Box width={["full", "500px"]} p={[2, 5]} boxShadow="0px 4px 8px rgba(0, 0, 0, 0.1)">
                 <Form p={2} width='full' onSubmit={handleEdit}>
-                    <Heading fontSize={['']}>Add songs</Heading>
+                    <Heading fontSize={['']}>Edit song</Heading>
                     <Box flexDirection="column" py={2}>
                         <Input
                             type="text"
@@ -169,9 +175,13 @@ const EditSongs = () => {
                             border="none"
                             outline="none"
                             justifyContent='center'
+                            borderRadius="20px"
                             bg="#247fcf"
                             color="white"
+                            disabled={isLoading}
+                            className={isLoading ? 'loading' : ''}
                         >
+
                             Edit
                         </Button>
 
