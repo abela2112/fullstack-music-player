@@ -38,8 +38,6 @@ const FormPage = () => {
                 condole.log(successMessage)
                 navigate('/verifyEmail')
             }
-
-
         } catch (error) {
             dispatch(setError(error?.message))
         }
