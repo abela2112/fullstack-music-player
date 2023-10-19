@@ -190,12 +190,14 @@ const getPlaylists = async (req, res) => {
 const verifyEmail = async (req, res) => {
   const { email, verificationCode } = req.body;
   const user = await User.findOne({ email: email });
+  console.log("user", user);
   if (!user) throw new NotFoundError("User not found  invalid link");
 
   const verifyToken = await verificationToken.findOne({
     userId: user._id,
     token: verificationCode,
   });
+  console.log("verifyToken", verifyToken);
   if (!verifyToken) throw new BadRequestError("invalid link");
   await User.updateOne({ _id: user._id, email_verified: true });
   verifyToken.remove();
