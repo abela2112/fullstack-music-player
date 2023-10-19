@@ -35,6 +35,7 @@ const FormPage = () => {
             }
             dispatch(registerUser(formData))
             if (successMessage !== '' && !isLoading) {
+                condole.log(successMessage)
                 navigate('/verifyEmail')
             }
 

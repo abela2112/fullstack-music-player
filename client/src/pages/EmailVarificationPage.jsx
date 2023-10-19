@@ -6,6 +6,7 @@ import Loader from '../components/Loader'
 
 const EmailVarificationPage = () => {
     const { userId, token } = useParams()
+    console.log(userId, token)
     const [isVerified, setIsVerified] = useState(false)
     const [error, setError] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
