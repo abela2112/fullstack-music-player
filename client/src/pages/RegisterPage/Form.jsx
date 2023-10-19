@@ -34,7 +34,7 @@ const FormPage = () => {
                 throw new Error("password doesn't match");
             }
             dispatch(registerUser(formData))
-            if (successMessage && !isLoading) {
+            if (successMessage !== '' && !isLoading) {
                 condole.log(successMessage)
                 navigate('/verifyEmail')
             }
