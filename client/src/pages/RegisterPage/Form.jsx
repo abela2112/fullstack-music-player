@@ -4,12 +4,14 @@ import { Box, Button, Form, Heading, Input, Label, P } from '../../components/St
 import { useNavigate } from 'react-router-dom';
 import { registerUser, setError, setUserLogin } from '../../redux/features/user';
 import { useDispatch, useSelector } from 'react-redux';
+import { createUserAPI } from '../../api/userApi';
 
 const FormPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch()
 
     const [pageType, setPageType] = useState("login");
+
     const isLogin = pageType === "login";
     const isRegister = pageType === "register";
     const [email, setEmail] = useState("");
@@ -33,11 +35,11 @@ const FormPage = () => {
             if (password !== confirmPassword) {
                 throw new Error("password doesn't match");
             }
-            dispatch(registerUser(formData))
-            if (successMessage !== '' && !isLoading) {
-                condole.log(successMessage)
+            createUserAPI(formData).then(({ data }) => {
                 navigate('/verifyEmail')
-            }
+            }).catch((err) => {
+                throw new Error(err.response?.data?.msg)
+            })
         } catch (error) {
             dispatch(setError(error?.message))
         }
