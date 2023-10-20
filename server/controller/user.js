@@ -199,7 +199,11 @@ const verifyEmail = async (req, res) => {
   });
   console.log("verifyToken", verifyToken);
   if (!verifyToken) throw new BadRequestError("invalid link");
-  await User.updateOne({ _id: user._id, email_verified: true });
+  await User.findByIdAndUpdate(
+    user?._id,
+    { email_verified: true },
+    { new: true }
+  );
   await verificationToken.findOneAndRemove({ userId: user._id });
 
   res.status(200).json({ message: "email verified successfully" });

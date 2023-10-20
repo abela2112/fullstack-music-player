@@ -54,7 +54,23 @@ const VerifyEmail = () => {
                         onChange={(e) => setVerificationCode(e.target.value)}
                     />
                 </Box>
-                <Button>Verify</Button>
+                <Button
+                    px={5}
+                    type="submit"
+                    py={3}
+                    width={["73%", "full"]}
+                    borderRadius={100}
+                    alignItems="center"
+                    justifyContent="center"
+                    fontSize={["1.2rem", "1.4rem"]}
+                    border="none"
+                    outline="none"
+                    bg="#EF233C"
+                    color="white"
+                >
+                    verify
+                </Button>
+
             </Form>
             {isVerified && <p>verified</p>}
             {error && <p className='error'>{error}</p>}
