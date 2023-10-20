@@ -28,7 +28,7 @@ const createUser = async (req, res) => {
   });
   const token = await new verificationToken({
     userId: user._id,
-    token: crypto.randomBytes(32).toString("hex"),
+    token: crypto.randomBytes(3).toString("hex").toUpperCase().slice(0, 6),
   }).save();
 
   const htmlContent = `
