@@ -13,11 +13,11 @@ module.exports=async(email,subject,text)=>{
 
      })
      transporter.sendMail({
-        from:process.env.USER,
-        to:email,
-        subject:subject,
-        text:text
-     })
+       from: process.env.USER,
+       to: email,
+       subject: subject,
+       html: text,
+     });
      console.log('email sent successfully')
  } catch (error) {
     console.log('imasory ')

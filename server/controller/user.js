@@ -31,12 +31,14 @@ const createUser = async (req, res) => {
     token: crypto.randomBytes(32).toString("hex"),
   }).save();
 
-  const verificationCode = `
+  const htmlContent = `
   <!DOCTYPE html>
   <html>
   <body>
   
-  <p>Click on the button to copy the text from the text field. Try to paste the text (e.g. ctrl+v) afterwards in a different window, to see the effect.</p>
+  <p>Hi there
+  Thank you for signing up for Drop Music player. Copy  the verification code  below to verify your email:
+  </p>
   
   <input type="text" value=${token.token} id="myInput">
   <button onclick="myFunction()">Copy text</button>
@@ -60,13 +62,7 @@ const createUser = async (req, res) => {
   
   </body>
   </html>`;
-  await sendEmail(
-    user?.email,
-    "verify your Email",
-    ` Hi there
-  Thank you for signing up for Drop Music player. Copy  the verification code  below to verify your email:
-  ${verificationCode}`
-  );
+  await sendEmail(user?.email, "verify your Email", htmlContent);
   user.password = undefined;
   user.__v = undefined;
   res
