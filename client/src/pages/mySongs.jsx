@@ -21,7 +21,7 @@ const MySongs = () => {
             <Box flexWrap='wrap'>
                 {songs.length > 0 && songs.map((song, i) => (<SongCard song={song} i={i} key={i} />))}
             </Box>
-            <NavLinkButton backgroundColor='#EF233C' to='/home/createSongs'>Add Your Songs</NavLinkButton>
+            <NavLinkButton backgroundColor='#EF233C' to='/home/add songs'>Add Your Songs</NavLinkButton>
             <Box flexDirection={['column', 'column', 'row']}>
             </Box>
         </Box>

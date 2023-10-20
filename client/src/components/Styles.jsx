@@ -280,7 +280,7 @@ export const NavLinkButton = styled(NavLink)(
     backgroundColor: 'rgba(204,204,204,60%)',
     color: '#464646',
     borderRadius: '10px',
-    width: 'auto',
+    width: '500px',
     "&:hover": {
       color: "white",
     },

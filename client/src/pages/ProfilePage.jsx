@@ -11,7 +11,7 @@ const ProfilePage = () => {
             <Box flexDirection='column' >
                 <Box justifyContent='center' my={2} >
 
-                    <Img width={'200px'} src={`${baseUrl}${user?.picture}`} borderRadius='50%' />
+                    <Img width={'200px'} src={`${baseUrl}/${user?.picture}`} borderRadius='50%' />
 
                 </Box>
                 <Box flexDirection={["column", "row"]} py={2}>
