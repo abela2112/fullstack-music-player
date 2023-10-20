@@ -5,7 +5,7 @@ import { Box, Img } from "../../components/Styles";
 
 const RegisterPage = () => {
   return (
-    <Box position="relative" width="full" height={"screen"}>
+    <Box position="relative" width="full" height={"screen"} bg="#F2F5F5">
       <Img src={background} width={"full"} height={"full"} objectFit="cover" display={['none', 'block']} />
       <Box
         width="full"
@@ -16,7 +16,7 @@ const RegisterPage = () => {
         alignItems="center"
         minHeight={"screen"}
       >
-        <Box bg={"white"} width={['full', 'auto']} height={['full', 'auto']} px={5} py={4} borderRadius={10}>
+        <Box bg={"#F2F5F5"} width={['full', 'auto']} height={['full', 'auto']} px={5} py={4} borderRadius={10}>
           <FormPage />
         </Box>
       </Box>

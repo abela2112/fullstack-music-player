@@ -35,7 +35,7 @@ export const P = styled.p`
     ${typography}
     ${fontStyle}
     ${fontSize}
-    text-decoration: underline;
+    text-decoration: none;
   transition: all 0.5s ease-in-out;
   transform: translateY(0);
   cursor: pointer;
@@ -202,6 +202,7 @@ export const Input = styled.input`
   padding-left: 5px;
   padding-right: 5px;
   letter-spacing: .5px;
+  font-family: 'Poppins, sans-serif';
 
   border: 1px solid #b0b0ac;;
   /* border-bottom: 2px solid #f0f0f0;  */

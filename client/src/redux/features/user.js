@@ -26,7 +26,8 @@ const userSlice = createSlice({
     },
     setUserLoginError: (state, action) => {
       state.isLoading = false;
-      state.errorMessage = action.payload?.msg;
+      state.errorMessage =
+        action.payload?.msg || "some thing went wrong please try again";
       console.log(action);
     },
 

@@ -1,31 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import { Box, Button, Form, Heading, Input, Label, P } from '../../components/Styles'
 
-import { useNavigate } from 'react-router-dom';
-import { registerUser, setError, setUserLogin } from '../../redux/features/user';
+import { Link, useNavigate } from 'react-router-dom';
+import { registerUser, setUserLogin } from '../../redux/features/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUserAPI } from '../../api/userApi';
 
 const FormPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch()
+    const [error, setError] = useState('')
 
-    const [pageType, setPageType] = useState("login");
-
-    const isLogin = pageType === "login";
-    const isRegister = pageType === "register";
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [picture, setPicture] = useState("");
 
-    const { errorMessage, successMessage, isLoading } = useSelector((state) => state.user)
+    const { isLoading } = useSelector((state) => state.user)
 
-
+    useEffect(() => {
+        if (error) {
+            setTimeout(() => {
+                setError('');
+            }, 5000);
+        }
+    }, [error])
 
     const handleRegister = async (e) => {
-
+        e.preventDefault()
         try {
             const formData = new FormData();
             formData.set("name", name);
@@ -37,44 +40,21 @@ const FormPage = () => {
             }
             const data = await createUserAPI(formData)
             console.log(data);
-                navigate('/verifyEmail')
-
-
-
+            navigate('/verifyEmail')
         } catch (error) {
-            console.log(error);
-            //dispatch(setError(error?.message))
+            if (error?.response?.data?.msg) { setError(error?.response?.data?.msg) }
+            else { setError(error.message) }
         }
     };
 
-    const handleLogin = async (e) => {
-        try {
-            dispatch(setUserLogin({ email, password }))
-            navigate('/home')
-            console.log('login here')
 
-        } catch (error) {
-            dispatch(setError(error.message))
-        }
-    }
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (isLogin) {
-            handleLogin()
-        }
-        if (isRegister) {
-            handleRegister()
-        }
-    }
     return (
         <Form width={['full', "600px"]}
             height={['full', "auto"]}
             alignItems='center'
             justifyContent='center'
-            onSubmit={handleSubmit}>
-            <Heading textAlign='center' fontFamily='Abel,open-sans'>{isLogin ? "Login" : "Register"}</Heading>
-            {isRegister && (
+            onSubmit={handleRegister}>
+            <Heading textAlign='center' fontFamily='Abel,open-sans'>Create new Account</Heading>
                 <Box flexDirection="column">
                     <Label htmlFor="title" py={2} >
                         Full Name
@@ -83,13 +63,13 @@ const FormPage = () => {
                         type="text"
                         placeholder="name"
                         px={3}
-                        py={3}
+                    py={[1, 3]}
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
                 </Box>
-            )}
-            <Box flexDirection="column" width={['340px', '600px']}>
+
+            <Box flexDirection="column" width={['340px', 'full', '600px']}>
                 <Label htmlFor="email" py={2}>
                     Email
                 </Label>
@@ -97,7 +77,7 @@ const FormPage = () => {
                     type="email"
                     placeholder="yourEmail.com"
                     px={3}
-                    py={3}
+                    py={[1, 3]}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
@@ -111,14 +91,12 @@ const FormPage = () => {
                     placeholder="password"
                     autoComplete='none'
                     px={3}
-                    py={3}
+                    py={[1, 3]}
                     borderRadius={5}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </Box>
-            {isRegister && (
-                <>
 
                     <Box flexDirection="column" >
                         <Label htmlFor="title" py={2}>
@@ -129,7 +107,7 @@ const FormPage = () => {
                             placeholder="confirm password"
                             autoComplete="new-password"
                             px={3}
-                            py={3}
+                    py={[1, 3]}
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />
@@ -141,13 +119,10 @@ const FormPage = () => {
                         <Input
                             type="file"
                             px={3}
-                            py={2}
+                    py={[1, 2]}
                             onChange={(e) => setPicture(e.target.files)}
                         />
-                    </Box>
-                </>
-            )}
-            {isLogin && <P onClick={() => navigate('/forgot')}>Forgot password</P>}
+            </Box>
 
             <Box justifyContent='center' marginTop={2}>
                 <Button
@@ -167,7 +142,7 @@ const FormPage = () => {
                     className={isLoading ? "loading" : ''}
 
                 >
-                    {isLogin ? "Login" : "Register"}
+                    Register
                 </Button>
             </Box>
             <P
@@ -176,16 +151,16 @@ const FormPage = () => {
                 textAlign="center"
                 textDecoration='underline'
                 style={{ hover: { Animation: 'slideUp 1s ease-in-out' } }}
-                onClick={() => setPageType(isLogin ? "register" : "login")}
+
             >
 
-                {isLogin ? "Don't have an account Register Here" : "have an account Login here"
-                }
+                have an account <Link to={'/'}>Login here</Link>
+
             </P>
             {
-                errorMessage && <p className='error'>{errorMessage}</p>
+                error && <p className='error'>{error}</p>
             }
-            {successMessage && <p>{successMessage}</p>}
+
         </Form>
     )
 }
