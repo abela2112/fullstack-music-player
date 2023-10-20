@@ -26,13 +26,33 @@ const VerifyEmail = () => {
             <Form onSubmit={handleVerify} flexDirection='column'>
                 <Heading>Verify your Email</Heading>
                 <p>check your email for verification code</p>
-                <Box>
-                    <Label>Email</Label>
-                    <Input type='email' placeholder='email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                <Box flexDirection="column" width={['340px', '600px']}>
+                    <Label htmlFor="email" py={2}>
+                        Email
+                    </Label>
+                    <Input
+                        type="email"
+                        placeholder="yourEmail.com"
+                        px={3}
+                        py={3}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
                 </Box>
-                <Box>
-                    <Label>Verification code</Label>
-                    <Input type='text' placeholder='verification code here' value={verificationCode} onChange={(e) => setVerificationCode(e.target.value)} />
+
+
+                <Box flexDirection="column">
+                    <Label htmlFor="title" py={2} >
+                        Verification code
+                    </Label>
+                    <Input
+                        type="text"
+                        placeholder='verification code here'
+                        px={3}
+                        py={3}
+                        value={verificationCode}
+                        onChange={(e) => setVerificationCode(e.target.value)}
+                    />
                 </Box>
                 <Button>Verify</Button>
             </Form>
