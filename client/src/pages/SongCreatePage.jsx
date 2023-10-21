@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Button, Form, Heading, Input, Label } from "../components/Styles";
 import { useDispatch, useSelector } from "react-redux";
-import { createSong } from "../redux/features/songs";
+import { createSong, setSongSuccessMessage } from "../redux/features/songs";
 import { createSongAPI } from "../api/songApi";
 import { useNavigate } from "react-router-dom";
+import { setSongError } from "../redux/features/songs";
 
 const SongCreatePage = () => {
     const dispatch = useDispatch()
@@ -17,15 +18,36 @@ const SongCreatePage = () => {
     const [country, setCountry] = useState("");
     const [coverImage, setCoverImage] = useState("");
     const [music, setMusic] = useState("");
-    const { isLoading, errorMessage } = useSelector(state => state.songs)
+    const { isLoading, error, successMessage } = useSelector(state => state.songs)
 
     useEffect(() => {
-        if (errorMessage) {
+        if (error) {
             setTimeout(() => {
-                dispatch(setError(''))
+                dispatch(setSongError(''))
             }, 5000);
         }
-    }, [errorMessage])
+    }, [error])
+
+
+    useEffect(() => {
+        if (successMessage) {
+            setTimeout(() => {
+                dispatch(setSongSuccessMessage(null))
+                handleCancel()
+                navigate('/home/mysongs')
+            }, 5000);
+
+        }
+    }, [successMessage]);
+
+    const handleCancel = () => {
+        setArtist('')
+        setCountry('')
+        setCoverImage('')
+        setGenre('')
+        setLanguage('')
+        setTitle('')
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -40,6 +62,7 @@ const SongCreatePage = () => {
         try {
             dispatch(createSong(formData))
             //navigate('/home')
+
 
         } catch (error) {
             console.log(error);
@@ -194,21 +217,14 @@ const SongCreatePage = () => {
                             bg="#909090"
                             my={[2, 1]}
                             color="white"
-                            onClick={() => {
-                                setArtist('')
-                                setCountry('')
-                                setCoverImage('')
-                                setGenre('')
-                                setLanguage('')
-                                setTitle('')
-
-                            }}
+                            onClick={handleCancel}
 
                         >
                             Cancel
                         </Button>
                     </Box>
                     {errorMessage && <p className="error">{errorMessage}</p>}
+                    {successMessage && <p className="success">{successMessage}</p>}
                 </Form>
             </Box>
         </Box>

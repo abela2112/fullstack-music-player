@@ -85,7 +85,13 @@
   padding: 1rem;
   width: 100%;
   color: red;
-  background-color: rgba(212 ,132, 132 ,0.8);;
+  background-color: rgba(212 ,132, 132 ,0.8);
+}
+.success{
+  padding: 1rem;
+  width: 100%;
+  color: rgb(207, 211, 208);
+  background-color: rgba(102, 249, 153, 0.8);
 }
 
 

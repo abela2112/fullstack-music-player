@@ -3,7 +3,8 @@ const initialState = {
   isLoading: false,
   songs: [],
   isModalOpen: false,
-  error: null,
+  error: "",
+  successMessage: null,
 };
 
 const songSlice = createSlice({
@@ -15,7 +16,6 @@ const songSlice = createSlice({
     },
     getSongsSuccess: (state, action) => {
       state.isLoading = false;
-
       state.songs = action.payload?.data;
     },
     getSongsFailure: (state) => {
@@ -27,6 +27,7 @@ const songSlice = createSlice({
     createSongSuccess: (state, action) => {
       console.log(action);
       state.isLoading = false;
+      state.successMessage = "song created successfully";
       state.songs.push(action.payload?.data);
     },
     createSongFailure: (state, action) => {
@@ -45,9 +46,11 @@ const songSlice = createSlice({
         } else return song;
       });
       state.songs = updatesong;
+      state.successMessage = "song successfully updated";
     },
     updateSongFailure: (state, action) => {
       state.isLoading = false;
+      state.successMessage = null;
       state.error = action.payload?.data?.error;
     },
     deleteSong: (state, action) => {
@@ -55,6 +58,12 @@ const songSlice = createSlice({
     },
     setModalOpen: (state) => {
       state.isModalOpen = !state.isModalOpen;
+    },
+    setSongError: (state, action) => {
+      state.error = action.payload;
+    },
+    setSongSuccessMessage: (state, action) => {
+      state.successMessage = action.payload;
     },
   },
 });
@@ -71,6 +80,8 @@ export const {
   setModalOpen,
   createSongSuccess,
   createSongFailure,
+  setSongError,
+  setSongSuccessMessage,
 } = songSlice.actions;
 
 export default songSlice.reducer;
