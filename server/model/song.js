@@ -16,10 +16,10 @@ const songSchema = new Schema({
 const validate = (song) => {
   const schema = Joi.object({
     title: Joi.string().required(),
-
     language: Joi.string().required(),
     genre: Joi.string().required(),
     artist: Joi.string().required(),
+    country: Joi.string().allow(),
   });
   return schema.validate(song);
 };
