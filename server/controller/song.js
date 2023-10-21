@@ -8,7 +8,9 @@ const getAllSong = async (req, res) => {
 };
 
 const createSong = async (req, res) => {
+  console.log(req.body);
   const { error } = validate(req.body);
+  
   if (error) throw new BadRequestError(error?.details[0].message);
   const { img, song } = req.files;
   console.log("img", img);
