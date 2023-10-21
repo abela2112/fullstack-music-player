@@ -78,6 +78,8 @@ const updateSong = async (req, res) => {
     },
     { new: true }
   );
+  console.log("before update", song);
+  console.log("after update", newSong);
 
   res.status(200).json(newSong);
 };
