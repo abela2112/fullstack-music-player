@@ -26,7 +26,7 @@ const GlobalStyles = () => (
 
 function App() {
   const token = useSelector(state => state.user?.token) || window.localStorage.getItem('token')
-  axios.defaults.baseURL = "http://localhost:5000"
+  axios.defaults.baseURL = import.meta.env.VITE_BASE_URL
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   //console.log(import.meta.env.VITE_BASE_URL)
 
