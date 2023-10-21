@@ -3,12 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { getSongByIdAPI, updateSongAPI } from '../api/songApi';
 import { Heading, Form, Input, Button, Box, Label } from '../components/Styles';
 import { useDispatch, useSelector } from 'react-redux'
-import { updateSong } from '../redux/features/songs';
-import SpinLoader from '../components/SpinLoader';
+import { setSongSuccessMessage, updateSong } from '../redux/features/songs';
+
 
 const EditSongs = () => {
     const { songId } = useParams()
-    const { isLoading } = useSelector(state => state.songs)
+    const { isLoading, error, successMessage } = useSelector(state => state.songs)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [title, setTitle] = useState("");
@@ -27,12 +27,31 @@ const EditSongs = () => {
             setArtist(data?.data?.artist)
             setGenre(data?.data?.genre)
             setLanguage(data?.data?.language)
-            setCountry(data?.data?.country)
-
+                setCountry(data?.data?.country)
         })
     }, [])
 
 
+
+
+    useEffect(() => {
+        if (error) {
+            setTimeout(() => {
+                dispatch(setSongError(''))
+            }, 5000);
+        }
+    }, [error])
+
+
+    useEffect(() => {
+        if (successMessage) {
+            setTimeout(() => {
+                dispatch(setSongSuccessMessage(null))
+                navigate('/home/mysongs')
+            }, 5000);
+
+        }
+    }, [successMessage]);
     const handleEdit = async (e) => {
         e.preventDefault();
 
@@ -79,10 +98,10 @@ const EditSongs = () => {
                             onChange={(e) => setTitle(e.target.value)}
                         />
                     </Box>
-                    <Box flexDirection="column" py={2}>
-                        {/* <Label htmlFor="artistName" py={2}>
+                    <Box flexDirection="column" >
+                        <Label htmlFor="artistName" py={2}>
                             Artist
-                        </Label> */}
+                        </Label>
                         <Input
                             type="text"
                             placeholder="artist name"
@@ -93,10 +112,10 @@ const EditSongs = () => {
                             onChange={(e) => setArtist(e.target.value)}
                         />
                     </Box>
-                    <Box flexDirection="column" py={2}>
-                        {/* <Label htmlFor="artistName" py={2}>
+                    <Box flexDirection="column" >
+                        <Label htmlFor="artistName" py={2}>
                             Artist
-                        </Label> */}
+                        </Label>
                         <Input
                             type="text"
                             placeholder="Genre"

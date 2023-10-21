@@ -24,7 +24,7 @@ const SongDetailes = () => {
     return (
         <Box width='full' flexDirection='column'>
             <Box width='full' height='400px'>
-                <Img width={'full'} height={'full'} src={`${import.meta.env.VITE_BASE_URL}${song?.img}`} borderRadius={10} />
+                <Img width={'full'} height={'full'} src={`${import.meta.env.VITE_BASE_URL}/${song?.img}`} borderRadius={10} />
             </Box>
             <Box flexDirection={['column', 'column', 'row']} justifyContent='center' width='full' >
                 <Box flexDirection='column' px={2} width='70%'>

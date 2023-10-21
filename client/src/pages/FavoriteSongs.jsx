@@ -29,6 +29,7 @@ const FavoriteSongs = () => {
             <h2>Favorite songs</h2>
             <Box flexWrap='wrap'>
                 {favoriteSongs?.length > 0 && favoriteSongs.map((song, i) => (<SongCard key={i} song={song} i={i} />))}
+                {favoriteSongs?.length < 0 && <p>no favorite songs</p>}
             </Box>
         </Box>
     )
