@@ -10,13 +10,16 @@ import PlayerWidget from '../widget/PlayerWidget'
 const SongsPage = () => {
     const dispatch = useDispatch()
     const { songs, isLoading } = useSelector(state => state.songs)
-    if (isLoading) {
-        return <Loader />
-    }
 
     useEffect(() => {
         dispatch(getSongsFetch())
     }, [])
+
+
+    if (isLoading) {
+        return <Loader />
+    }
+
     return (
         <Box flexDirection={'column'} >
             <Heading>songs</Heading>
