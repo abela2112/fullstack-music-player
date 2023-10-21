@@ -20,7 +20,7 @@ const SearchPage = () => {
         <Box flexDirection='column'>
             <Heading>Search Results</Heading>
             <Box flexWrap='wrap'>
-                {songs.length > 0 && search(songs)?.map((song, i) => (<SongCard song={song} i={i} key={i} />))}
+                {songs.length > 0 ? search(songs)?.map((song, i) => (<SongCard song={song} i={i} key={i} />)) : <p>No result</p>}
             </Box>
         </Box>
     )
