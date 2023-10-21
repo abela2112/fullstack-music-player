@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-
-import axios from "axios";
 import { Box, Button, Form, Heading, Input, Label } from "../components/Styles";
 import { useDispatch, useSelector } from "react-redux";
 import { createSong, setSongSuccessMessage } from "../redux/features/songs";
-import { createSongAPI } from "../api/songApi";
 import { useNavigate } from "react-router-dom";
 import { setSongError } from "../redux/features/songs";
 
@@ -33,13 +30,12 @@ const SongCreatePage = () => {
         if (successMessage) {
             setTimeout(() => {
                 dispatch(setSongSuccessMessage(null))
-                handleCancel()
                 navigate('/home/mysongs')
             }, 5000);
 
         }
     }, [successMessage]);
-
+    console.log('Success', successMessage)
     const handleCancel = () => {
         setArtist('')
         setCountry('')
