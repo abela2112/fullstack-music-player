@@ -219,7 +219,7 @@ const SongCreatePage = () => {
                             Cancel
                         </Button>
                     </Box>
-                    {errorMessage && <p className="error">{errorMessage}</p>}
+                    {error && <p className="error">{error}</p>}
                     {successMessage && <p className="success">{successMessage}</p>}
                 </Form>
             </Box>
