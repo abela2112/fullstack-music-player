@@ -4,9 +4,8 @@ import DiscoverPage from "./DiscoverPage";
 import SongCreatePage from "./SongCreatePage";
 import FavoriteSongs from "./FavoriteSongs";
 import ProfilePage from "./ProfilePage";
-import MusicPlayer from "../components/MusicPlayer";
 import { useSelector } from "react-redux";
-import { Box, FlexNavLink, NavLinkButton } from "../components/Styles";
+import { Box, FlexNavLink, GridContainer, NavLinkButton } from "../components/Styles";
 import Sidebar from "./sidebar";
 import Header from "../components/header";
 import MySongs from "./mySongs";
@@ -15,10 +14,13 @@ import SongsPage from "./SongsPage";
 import EditSongs from "./EditSongs";
 import SearchPage from "./SearchPage";
 import HorizontalMenu from "../components/HorizontalMenu";
+import Recents from "./Recents ";
+
 
 
 const HomePage = () => {
-    const { activeSong } = useSelector((state) => state.player);
+
+
     return (
         <>
             <Box
@@ -34,6 +36,7 @@ const HomePage = () => {
                     width={"full"}
                     height={"calc(100vh-72px)"}
                     overflow='hidden'
+
 
                 >
                     <Header />
@@ -53,7 +56,7 @@ const HomePage = () => {
                                 <Route path="/Albums" element={<ProfilePage />} />
                                 <Route path="/create playlist" element={<ProfilePage />} />
                                 <Route path="/artist" element={<ProfilePage />} />
-                                <Route path="/recents" element={<ProfilePage />} />
+                                <Route path="/recents" element={<Recents />} />
                                 <Route path="/best of 2023" element={<ProfilePage />} />
                                 <Route path="/songs" element={<SongsPage />} />
                                 <Route path="/search/:searchTerm" element={<SearchPage />} />
@@ -64,6 +67,9 @@ const HomePage = () => {
 
                             </Routes>
                         </Box>
+
+
+
                     </Box>
                 </Box>
             </Box>

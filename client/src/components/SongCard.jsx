@@ -57,7 +57,7 @@ const SongCard = ({ song, i }) => {
                 </Box>
 
                 <Box alignItems='center' justifyContent='start' position='relative'>
-                    {favoriteSongs?.some((item) => item?._id === song._id) ? <AiFillHeart size={30} color='#EF233C' onClick={() => handleFavorites(song?._id)} /> : <AiOutlineHeart size={30} onClick={() => handleFavorites(song?._id)} />}
+                    {favoriteSongs?.some((item) => item?._id === song?._id) ? <AiFillHeart size={30} color='#EF233C' onClick={() => handleFavorites(song?._id)} /> : <AiOutlineHeart size={30} onClick={() => handleFavorites(song?._id)} />}
                     <BsThreeDots size={30}
                         onClick={() => setIsClicked(!isClicked)} className='icon' />
 

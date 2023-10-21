@@ -10,7 +10,7 @@ import PlayerWidget from '../widget/PlayerWidget'
 const SongsPage = () => {
     const dispatch = useDispatch()
     const { songs, isLoading } = useSelector(state => state.songs)
-
+    const { activeSong } = useSelector((state) => state.player);
     useEffect(() => {
         dispatch(getSongsFetch())
     }, [])
@@ -21,12 +21,12 @@ const SongsPage = () => {
     }
 
     return (
-        <Box flexDirection={'column'} >
+        <Box flexDirection={'column'} width='full' >
             <Heading>songs</Heading>
-            <Box flexWrap='wrap'>
+            <Box flexWrap='wrap' width='full'>
                 {songs.length > 0 && songs.map((song, i) => (<SongCard song={song} i={i} key={i} />))}
             </Box>
-            <PlayerWidget />
+            {activeSong && <PlayerWidget />}
         </Box>
     )
 }

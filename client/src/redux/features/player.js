@@ -6,6 +6,7 @@ const initialState = {
   isActive: false,
   isPlaying: false,
   activeSong: {},
+  recents: [],
   genreListId: "",
 };
 
@@ -13,9 +14,16 @@ const playerSlice = createSlice({
   name: "player",
   initialState,
   reducers: {
+    // setCurrentSongs: (state, action) => {
+    //   console.log(action.payload);
+    //   state.currentSongs = action.payload;
+    // },
     setActiveSong: (state, action) => {
       state.activeSong = action.payload.song;
-
+      state.recents.unshift(action.payload.song);
+      if (state.recents.length > 5) {
+        state.recents.pop();
+      }
       if (action.payload?.data?.tracks?.hits) {
         state.currentSongs = action.payload.data?.tracks.hits;
       } else if (action.payload?.data?.properties) {
@@ -65,6 +73,7 @@ export const {
   nextSong,
   prevSong,
   playPause,
+  setCurrentSongs,
   selectGenreListId,
 } = playerSlice.actions;
 

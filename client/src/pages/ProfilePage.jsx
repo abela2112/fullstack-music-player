@@ -53,10 +53,7 @@ const ProfilePage = () => {
                     <Input
                         type="text"
                         placeholder="Genre"
-                        px={[0, 3]}
-                        py={[2]}
                         disabled
-                        fontSize={["1rem", "1.2rem"]}
                         value={user?.email_verified}
                     // onChange={(e) => setGenre(e.target.value)}
                     />
@@ -82,21 +79,6 @@ const ProfilePage = () => {
                     </Button>
 
                 </Box>
-
-                {/* <Box flexDirection={["column", "row"]} alignItems='center' py={2}>
-                    <Label htmlFor="artistName" py={2}>
-                        Password:
-                    </Label>
-                    <Input
-                        type="text"
-                        placeholder="artist name"
-                        px={[0, 3]}
-                        py={[0, 2]}
-                        fontSize={["1rem", "1.2rem"]}
-                        value={user?.email}
-                    //onChange={(e) => setArtist(e.target.value)}
-                    />
-                </Box> */}
 
                 <Box>
 

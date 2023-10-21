@@ -62,7 +62,7 @@ const signIn = async (req, res) => {
     // return res.status(400).json({ message: "User not found" });
     throw new NotFoundError(`user not found`);
   }
-  const validUser = await bycryptjs.compare(password, user.password);
+  const validUser = bycryptjs.compare(password, user.password);
 
   if (!validUser) {
     //return res.status(400).json({ message: "invalid password" });

@@ -17,6 +17,7 @@ import {
   getSongsAPI,
   updateSongAPI,
 } from "../../api/songApi";
+import { setActiveSong, setCurrentSongs } from "../features/player";
 
 function* workGetSongFetch() {
   try {
@@ -25,6 +26,7 @@ function* workGetSongFetch() {
     yield put(getSongsSuccess(songs));
   } catch (error) {
     yield put(getSongsFailure());
+
   }
 }
 

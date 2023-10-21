@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Heading } from '../components/Styles'
+import { Box, Heading, P } from '../components/Styles'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import SongCard from '../components/SongCard'
@@ -20,7 +20,9 @@ const SearchPage = () => {
         <Box flexDirection='column'>
             <Heading>Search Results</Heading>
             <Box flexWrap='wrap'>
-                {songs.length > 0 ? search(songs)?.map((song, i) => (<SongCard song={song} i={i} key={i} />)) : <p>No result</p>}
+                {songs.length > 0 && search(songs).length > 0 ? search(songs).map((song, i) => (<SongCard song={song} i={i} key={i} />)) : <Box width='full' >
+                    <P fontSize='36px' color='#909090'>No Results for {searchTerm}</P>
+                </Box>}
             </Box>
         </Box>
     )

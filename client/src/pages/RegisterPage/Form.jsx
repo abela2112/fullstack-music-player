@@ -67,9 +67,7 @@ const FormPage = () => {
                     </Label>
                     <Input
                         type="text"
-                        placeholder="name"
-                        px={3}
-                    py={[1, 3]}
+                    placeholder="name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
@@ -82,8 +80,7 @@ const FormPage = () => {
                 <Input
                     type="email"
                     placeholder="yourEmail@gmail.com"
-                    px={3}
-                    py={[1, 3]}
+
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
@@ -96,9 +93,6 @@ const FormPage = () => {
                     type="password"
                     placeholder="password"
                     autoComplete='none'
-                    px={3}
-                    py={[1, 3]}
-                    borderRadius={5}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
@@ -111,9 +105,8 @@ const FormPage = () => {
                         <Input
                             type="password"
                             placeholder="confirm password"
-                            autoComplete="new-password"
-                            px={3}
-                    py={[2]}
+                    autoComplete="none"
+
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />
@@ -124,13 +117,12 @@ const FormPage = () => {
                         </Label>
                         <Input
                             type="file"
-                            px={3}
-                    py={[1, 2]}
+
                             onChange={(e) => setPicture(e.target.files)}
                         />
             </Box>
 
-            <Box justifyContent='center' alignItems='center' marginTop={2}>
+            <Box justifyContent='center' alignItems='center' marginTop={3}>
                 <Button
                     px={5}
                     type="submit"

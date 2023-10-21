@@ -47,8 +47,6 @@ const LoginForm = () => {
                 <Input
                     type="email"
                     placeholder="yourEmail.com"
-                    px={3}
-                    py={3}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
@@ -61,9 +59,7 @@ const LoginForm = () => {
                     type="password"
                     placeholder="password"
                     autoComplete='none'
-                    px={3}
-                    py={3}
-                    borderRadius={5}
+
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />

@@ -52,6 +52,14 @@ const EditSongs = () => {
 
         }
     }, [successMessage]);
+    const handleCancel = () => {
+        setArtist('')
+        setCountry('')
+        setCoverImage('')
+        setGenre('')
+        setLanguage('')
+        setTitle('')
+    }
     const handleEdit = async (e) => {
         e.preventDefault();
 
@@ -84,16 +92,17 @@ const EditSongs = () => {
             alignItems="center"
             bg={'white'}
         >
-            <Box width={["full", "500px"]} p={[2, 5]} boxShadow="0px 4px 8px rgba(0, 0, 0, 0.1)">
-                <Form p={2} width='full' onSubmit={handleEdit}>
-                    <Heading fontSize={['']}>Edit song</Heading>
-                    <Box flexDirection="column" py={2}>
+            <Box width={["full", "80%", "70%", "60%"]} p={[2, 5]} boxShadow="0px 4px 8px rgba(0, 0, 0, 0.1)" justifyContent='center' alignItems='center' >
+                <Form p={2} width={['full', '80%']} onSubmit={handleEdit}>
+                    <Heading fontSize={['36px']} fontWeight='500'>Edit song</Heading>
+                    <Box flexDirection="column" >
+                        <Label htmlFor="title" py={2}>
+                            Title
+                        </Label>
                         <Input
                             type="text"
                             placeholder="title"
-                            px={[0, 3]}
-                            py={[0, 2]}
-                            fontSize={["1rem", "1.2rem"]}
+
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                         />
@@ -105,59 +114,46 @@ const EditSongs = () => {
                         <Input
                             type="text"
                             placeholder="artist name"
-                            px={[0, 3]}
-                            py={[0, 2]}
-                            fontSize={["1rem", "1.2rem"]}
                             value={artist}
                             onChange={(e) => setArtist(e.target.value)}
                         />
                     </Box>
                     <Box flexDirection="column" >
-                        <Label htmlFor="artistName" py={2}>
-                            Artist
+                        <Label htmlFor="Genre" py={2}>
+                            Genre
                         </Label>
                         <Input
                             type="text"
                             placeholder="Genre"
-                            px={[0, 3]}
-                            py={[0, 2]}
-                            fontSize={["1rem", "1.2rem"]}
                             value={genre}
                             onChange={(e) => setGenre(e.target.value)}
                         />
                     </Box>
-                    <Box flexDirection="column" py={2}>
-                        {/* <Label htmlFor="title" py={2}>
+                    <Box flexDirection="column" >
+                        <Label htmlFor="title" py={2}>
                             Language
-                        </Label> */}
+                        </Label>
                         <Input
                             type="text"
                             placeholder="language"
-                            px={[0, 3]}
-                            py={[0, 2]}
-                            fontSize={["1rem", "1.2rem"]}
                             value={language}
                             onChange={(e) => setLanguage(e.target.value)}
                         />
                     </Box>
 
-                    <Box flexDirection="column" py={2}>
-                        {/* {" "}
+                    <Box flexDirection="column">
                         <Label htmlFor="country" py={2}>
                             country
-                        </Label> */}
+                        </Label>
                         <Input
                             type="text"
                             placeholder="country"
-                            px={[0, 3]}
-                            py={[0, 2]}
-                            fontSize={["1rem", "1.2rem"]}
                             autoComplete="none"
                             value={country}
                             onChange={(e) => setCountry(e.target.value)}
                         />
                     </Box>
-                    <Box flexDirection="column" py={2}>
+                    <Box flexDirection="column">
 
                         <Label htmlFor="cover-photo">
                             cover Photo
@@ -165,37 +161,33 @@ const EditSongs = () => {
                         <Input
                             type="file"
                             placeholder="cover photo"
-                            px={[0, 3]}
-                            py={[0, 2]}
-                            fontSize={["1rem", "1.2rem"]}
                             onChange={(e) => setCoverImage(e.target.files)}
                         />
                     </Box>
-                    <Box flexDirection="column" py={2}>
+                    <Box flexDirection="column">
                         <Label htmlFor="title" py={2}>
                             Music
                         </Label>
                         <Input
                             type="file"
                             placeholder="music"
-                            px={[0, 3]}
-                            py={[0, 2]}
-                            fontSize={["1rem", "1.2rem"]}
                             onChange={(e) => setMusic(e.target.files)}
                         />
                     </Box>
-                    <Box justifyContent={["center", "flex-end"]} mt={4}>
+                    <Box flexDirection={['column', 'row']} justifyContent={["center", "flex-end"]} mt={4}>
                         <Button
                             type="submit"
                             width={["100%", '300px']}
                             px={[0, 3]}
-                            py={2}
+                            py={[2, 3]}
+                            mx={2}
+                            my={[2, 1]}
                             fontSize={"1.4rem"}
                             border="none"
                             outline="none"
                             justifyContent='center'
                             borderRadius="20px"
-                            bg="#247fcf"
+                            bg="#f0354b"
                             color="white"
                             disabled={isLoading}
                             className={isLoading ? 'loading' : ''}
@@ -203,8 +195,30 @@ const EditSongs = () => {
 
                             Edit
                         </Button>
+                        <Button
+                            type="button"
+                            width={["100%", '300px']}
+                            px={[0, 3]}
+                            py={[2, 3]}
+                            mx={2}
+                            fontSize={"1.4rem"}
+                            border="none"
+                            outline="none"
+                            justifyContent="center"
+                            borderRadius='12px'
+                            bg="#909090"
+                            my={[2, 1]}
+                            color="white"
+                            onClick={handleCancel}
+
+                        >
+                            Cancel
+                        </Button>
 
                     </Box>
+                    {error && <p className="error">{error}</p>}
+                    {successMessage && <p className="success">{successMessage}</p>}
+
                 </Form>
             </Box>
         </Box>

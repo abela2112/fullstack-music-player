@@ -52,6 +52,9 @@ ${typography}
 ${color}
   ${fontSize}
   ${fontFamily}
+  font-size: 36px;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
 `;
 export const Form = styled.form`
   ${space}
@@ -199,12 +202,11 @@ export const Input = styled.input`
   ${typography}
   ${color}
   background-color: transparent;
-  font-size: 1rem;
+  font-size: 20px;
   border-radius: 10px;
   width:100%;
   min-height: 30px;
-  padding-left: 20px;
-  padding-right: 5px;
+  padding: 10px 5px 10px 20px;
   letter-spacing: .5px;
   font-family: 'Poppins, sans-serif';
 
@@ -226,6 +228,10 @@ export const Input = styled.input`
   } */
   ::placeholder {
     text-transform: capitalize;
+  }
+  @media screen and (min-width: 40em){
+    font-size: 1.3rem;
+    padding: 16px;
   }
   
 `;
@@ -279,10 +285,10 @@ export const GridContainer = styled.div`
   }
 
   @media screen and (min-width: 800px) and (max-width:1200px) {
-    grid-template-columns:50% 50%;// Change the number of columns for smaller screens if needed
+    grid-template-columns:60% 40%;// Change the number of columns for smaller screens if needed
   }
   @media screen and  (min-width:1200px) {
-    grid-template-columns: 70% 30%; // Change the number of columns for smaller screens if needed
+    grid-template-columns: 60% 40%; // Change the number of columns for smaller screens if needed
   }
 `
 export const FlexNavLink = styled(NavLink)(
@@ -362,7 +368,7 @@ export const Label = styled.label`
   padding: 0.5rem;
   ${space}
   @media screen and (max-width: 1000px) {
-    font-size:16px; // Change the number of columns for smaller screens if needed
+    font-size:18px; // Change the number of columns for smaller screens if needed
   }
 
 `;

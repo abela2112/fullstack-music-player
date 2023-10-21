@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Music from '../components/Music'
-import axios from 'axios'
-import { getPlayLists, setPlaylist } from '../redux/features/user'
-import { useDispatch, useSelector } from 'react-redux'
 import { AnimationBox, Box, Button, Heading, NavLinkButton } from '../components/Styles'
 
 const PlayList = ({ songs }) => {
-
-
+    useEffect(() => { }, [])
     return (
         <AnimationBox width='full'>
             <Box bg='transparent' p={1} width='full'>
