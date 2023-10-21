@@ -10,7 +10,7 @@ const PlayList = ({ songs }) => {
                 <Box flexDirection='column' bg='white' px={[2, 3]} py={3} width={['full']}>
                     <Box justifyContent='space-between' width={['full', '70%']}  >
                         <Heading fontSize='18px' color='#2B2D42'>New Played</Heading>
-                        <Box justifyContent='space-between' display={['none', 'flex']} >
+                        <Box justifyContent='space-between' display={['none', 'none', 'flex']} >
                             <Button px={3} py={1} mx={2} borderRadius={20} bg={'#F2F5F5'} border="1px solid #909090" justifyContent='center' alignItems='center'>Today</Button>
                             <Button px={3} py={1} mx={2} bg={'#F2F5F5'} borderRadius={20} border="1px solid #909090" justifyContent='center' alignItems='center'> week</Button>
                             <Button px={3} py={1} mx={2} bg={'#F2F5F5'} borderRadius={20} border="1px solid #909090" justifyContent='center' alignItems='center'> Month</Button>

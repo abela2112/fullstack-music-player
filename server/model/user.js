@@ -49,9 +49,12 @@ const userSchema = new Schema(
   },
   { timestamps: true }
 );
-userSchema.pre("save", async function () {
+
+userSchema.pre("save", async function (next) {
   const salt = await bycryptjs.genSalt(10);
+
   this.password = await bycryptjs.hash(this.password, salt);
+  if (!this.isModified("password")) return next();
 });
 userSchema.methods.generateAuthToken = function () {
   const token = Jwt.sign(
