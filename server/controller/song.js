@@ -57,6 +57,7 @@ const updateSong = async (req, res) => {
   const { title, artist, genre, language, country } = req.body;
   console.log(title, artist, genre, language, country);
   if (req.files) {
+    console.log("files", req.files);
     newFile = req.files?.map(({ originalname, path }) => {
       const ext = originalname?.split(".")[1];
       const newpath = path + "." + ext;
