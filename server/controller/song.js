@@ -53,19 +53,26 @@ const getSingleSong = async (req, res) => {
 
 const updateSong = async (req, res) => {
   const { id } = req.params;
-  let newFile;
+  // let newFile;
   const { title, artist, genre, language, country } = req.body;
   console.log(title, artist, genre, language, country);
-  if (req.files) {
-    console.log("files", req.files);
-    newFile = req.files?.map(({ originalname, path }) => {
-      const ext = originalname?.split(".")[1];
-      const newpath = path + "." + ext;
-      fs.renameSync(path, newpath);
-      return newpath;
-    });
+  const { img, song } = req.files;
+  let imagNewpath;
+  let songNewpath;
+  if (img) {
+    const imageFile = img[0];
+    const imagExt = imageFile?.originalname?.split(".")[1];
+    imagNewpath = imageFile?.path + "." + imagExt;
+    fs.renameSync(imageFile?.path, imagNewpath);
   }
-  const song = await Song.findById(id);
+
+  if (song) {
+    const songFile = song[0];
+    const songExt = songFile?.originalname?.split(".")[1];
+    songNewpath = songFile?.path + "." + songExt;
+    fs.renameSync(songFile?.path, songNewpath);
+  }
+  const oldSong = await Song.findById(id);
   const newSong = await Song.findByIdAndUpdate(
     id,
     {
@@ -74,8 +81,8 @@ const updateSong = async (req, res) => {
       genre,
       language,
       country,
-      img: newFile[1] || song?.img,
-      song: newFile[0] || song?.song,
+      img: imagNewpath || oldSong?.img,
+      song: songNewpath || oldSong?.song,
     },
     { new: true }
   );
