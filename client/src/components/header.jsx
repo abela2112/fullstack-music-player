@@ -11,18 +11,7 @@ const Header = () => {
     return (
         <Box width='full' alignItems='center' justifyContent='space-between' my={2}>
             <SearchBar />
-            <Box display={['none', "flex"]}>
-                <Box
-                    borderRadius={5}
-                    width="auto"
-                    color="black"
-                    alignItems="center"
-                    bg="transparent"
-                    marginRight={1}
-                >
-                    <AiOutlineBell size={30} className="icon" />
-                </Box>
-                <Link
+            <Link
                     style={{
                         width: "60px",
                         height: "60px",
@@ -45,7 +34,7 @@ const Header = () => {
                 </Link>
 
 
-            </Box>
+
 
         </Box>
     );

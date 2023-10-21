@@ -1,26 +1,25 @@
 import React, { useState } from "react";
-import { background } from "../../assets";
+import { background, backgroundRegister } from "../../assets";
 import FormPage from "./Form";
-import { Box, Img } from "../../components/Styles";
+import { Box, GridBox, Img } from "../../components/Styles";
 
 const RegisterPage = () => {
   return (
-    <Box position="relative" width="full" height={"screen"} bg="#F2F5F5">
-      <Img src={background} width={"full"} height={"full"} objectFit="cover" display={['none', 'block']} />
-      <Box
-        width="full"
-        position="absolute"
-        inset="0"
-        flexDirection={"row"}
-        justifyContent="center"
-        alignItems="center"
-        minHeight={"screen"}
-      >
-        <Box bg={"#F2F5F5"} width={['full', 'auto']} height={['full', 'auto']} px={5} py={4} borderRadius={10}>
-          <FormPage />
+    <Box position="relative" width="full" height={"screen"} bg="#F8F8F8" p={1}>
+
+      <GridBox >
+        <Box bg={"#F8F8F8"} width={['full']} height={['full']} px={[1, 3, 4, 5]} py={[2, 3, 4]} borderRadius={10} justifyContent={['center']} alignItems='center'>
+
+          <Box width={['70%', '800px']} justifyContent={['center', 'center', 'start']} alignItems='center'>
+            <FormPage />
+          </Box>
         </Box>
-      </Box>
+        <Box>
+          <Img src={backgroundRegister} width={"full"} height={"full"} objectFit="cover" display={['none', 'none', 'none', 'block']} />
+        </Box>
+      </GridBox>
     </Box>
+
   );
 };
 

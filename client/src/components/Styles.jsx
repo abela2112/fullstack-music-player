@@ -12,6 +12,7 @@ import {
   fontSize,
   fontStyle,
   fontWeight,
+  grid,
   layout,
   opacity,
   overflow,
@@ -38,14 +39,15 @@ export const P = styled.p`
     text-decoration: none;
   transition: all 0.5s ease-in-out;
   transform: translateY(0);
-  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  
   &:hover {
     transform: translateY(-10%);
   }
 `;
 
 export const Heading = styled.h1`
-
+${typography}
   ${textAlign}
 ${color}
   ${fontSize}
@@ -60,6 +62,7 @@ ${border}
 ${typography}
 ${fontStyle}
 ${fontSize}
+${width}
 display: flex;
 flex-direction: column;
 `;
@@ -195,19 +198,20 @@ export const Input = styled.input`
   ${layout}
   ${typography}
   ${color}
-  font-size: 1.2rem;
+  background-color: transparent;
+  font-size: 1rem;
   border-radius: 10px;
-  width: calc(100% - 30px);
+  width:100%;
   min-height: 30px;
-  padding-left: 5px;
+  padding-left: 20px;
   padding-right: 5px;
   letter-spacing: .5px;
   font-family: 'Poppins, sans-serif';
 
-  border: 1px solid #b0b0ac;;
+  border: 2px solid #b0b0ac;;
   /* border-bottom: 2px solid #f0f0f0;  */
   &:valid {
-    border-color: #247fcf; }
+    border-color: #636364; }
   &:focus {
     outline: none;
     border-color: #b0b0ac; }
@@ -242,7 +246,45 @@ export const Button = styled.button`
     opacity: 0.9;
   }
 `;
+export const GridBox = styled.div`
+  display: grid;
+  grid-template-columns:50% 50%;
+  gap: 1rem;
+  width:100%;
+  height:100%;
+  ${space}
+  ${color}
+  ${border}
+  ${layout}
+  ${position}
+  ${shadow}
+  ${background}
+  ${opacity}
+  ${width}
+  ${overflow}
 
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: 1fr; // Change the number of columns for smaller screens if needed
+  }
+`;
+
+export const GridContainer = styled.div`
+  display: grid;
+  ${grid}
+  ${layout}
+  ${space}
+
+  @media screen and (max-width: 800px) {
+    grid-template-columns: 1fr; // Change the number of columns for smaller screens if needed
+  }
+
+  @media screen and (min-width: 800px) and (max-width:1200px) {
+    grid-template-columns:50% 50%;// Change the number of columns for smaller screens if needed
+  }
+  @media screen and  (min-width:1200px) {
+    grid-template-columns: 70% 30%; // Change the number of columns for smaller screens if needed
+  }
+`
 export const FlexNavLink = styled(NavLink)(
   {
     position: 'relative',
@@ -280,7 +322,7 @@ export const NavLinkButton = styled(NavLink)(
     backgroundColor: 'rgba(204,204,204,60%)',
     color: '#464646',
     borderRadius: '10px',
-    width: '500px',
+    width: '300px',
     "&:hover": {
       color: "white",
     },
@@ -311,12 +353,18 @@ export const FlexBetween = styled(Box)({
   alignContent: 'center',
 })
 export const Label = styled.label`
-  font-size: 1.2rem;
-  font-weight: 500;
+  font-size: 22px;
+  font-weight: 400;
   color: #2a2826;
+  text-align: start;
+  font-family: 'Poppins','sans-serif';
   text-transform: capitalize;
   padding: 0.5rem;
   ${space}
+  @media screen and (max-width: 1000px) {
+    font-size:16px; // Change the number of columns for smaller screens if needed
+  }
+
 `;
 // export const Span = styled.span`
 // ${fontSize}
@@ -336,6 +384,7 @@ export const Search = styled.input`
   border: 1px solid gray;
   border-radius: 80px;
   font-size: 1.1rem;
+  position: relative;
   :focus {
     color: black;
     border: 2px solid black;

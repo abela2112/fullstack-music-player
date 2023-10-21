@@ -26,16 +26,16 @@ const Music = ({ song, i }) => {
         dispatch(setFavoriteSongs(data))
     }
     return (
-        <Box my={2} bg={'#F2F5F5'} p={[0, 2]} justifyContent="space-between" width={['100%', "800px"]} alignItems="center">
+        <Box my={2} bg={'#F2F5F5'} p={[0, 2]} justifyContent="space-between" alignItems="center">
             <Box justifyContent="space-evenly" alignItems="center" >
                 <PlayPause song={song} i={i} />
-                <Img width={'50px'} src={`${import.meta.env.VITE_BASE_URL}/${song?.img}`} alt='songphoto' borderRadius={10} />
-                <Box flexDirection='column' ml={2} >
-                    <Span fontSize={'1.2rem'} fontWeight={'bold'} p={2} >{song?.title}</Span>
-                    <Span>{song?.artist}</Span>
+                <Img width={'50px'} src={`${import.meta.env.VITE_BASE_URL}/${song?.img}`} alt='songphoto' borderRadius={10} display={['none', 'block']} />
+                <Box flexDirection='column' ml={2} justifyContent='start' >
+                    <Span fontSize={'1.1rem'} fontWeight={'400'} py={1} >{song?.title}</Span>
+                    <Span fontSize='14px'>{song?.artist}</Span>
                 </Box>
             </Box>
-            <Box justifyContent="space-around" alignItems="center" display={['none', 'flex']}>
+            <Box justifyContent="space-around" alignItems="center" display={['flex']}>
                 {favoriteSongs?.some((item) => item?._id === song._id) ? <AiFillHeart size={30} color='#EF233C' onClick={() => handleFavorites(song?._id)} /> : <AiOutlineHeart size={30} onClick={() => handleFavorites(song?._id)} />}
                 <BsThreeDots size={30}
                     onClick={() => setIsClicked(!isClicked)} className='icon' />

@@ -33,6 +33,7 @@ const HomePage = () => {
                     flexDirection={"column"}
                     width={"full"}
                     height={"calc(100vh-72px)"}
+                    overflow='hidden'
 
                 >
                     <Header />

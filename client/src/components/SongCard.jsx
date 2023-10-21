@@ -52,8 +52,8 @@ const SongCard = ({ song, i }) => {
             </Box>
             <Box justifyContent='space-between' mt={3} position='relative'>
                 <Box flexDirection='column'>
-                    <FlexNavLink color={'black'} to={`/home/songDetails/${song?._id}`} py={2} fontWeight={'500'} fontSize={'1.4rem'}>{song?.title}</FlexNavLink>
-                    <FlexNavLink color={'#909090'} to={'/home/artist'} py={2} fontSize={'1rem'}>{song?.artist}</FlexNavLink>
+                    <FlexNavLink color={'black'} to={`/home/songDetails/${song?._id}`} py={2} fontWeight={'500'} fontSize={['1rem', '1.4rem']}>{song?.title}</FlexNavLink>
+                    <FlexNavLink color={'#909090'} to={'/home/artist'} py={2} fontSize={['14px', '1rem']}>{song?.artist}</FlexNavLink>
                 </Box>
 
                 <Box alignItems='center' justifyContent='start' position='relative'>
@@ -74,7 +74,3 @@ const SongCard = ({ song, i }) => {
 }
 
 export default SongCard
-{/* <Box alignItems={'center'} justifyContent={'flex-end'} mt={2}>
-<Span p={2} borderRadius={5} bg={'white'} mr={1}><FaPlus size={20} onClick={() => handlePlaylist(song?._id)} /></Span>
-<Span p={2} borderRadius={5} bg={'white'}>{favariteSongs.includes(song) ? <FaHeart color='pink' size={20} onClick={() => handleFavorites(song?._id)} /> : <FaHeart size={20} onClick={() => handleFavorites(song?._id)} />} </Span>
-</Box> */}

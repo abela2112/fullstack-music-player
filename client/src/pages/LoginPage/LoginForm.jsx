@@ -33,14 +33,14 @@ const LoginForm = () => {
         }
     }, [errorMessage])
     return (
-        <Form width={['full', "600px"]}
+        <Form width={['340px', '80%', '70%']}
             height={['full', "auto"]}
             alignItems='center'
             justifyContent='center'
             onSubmit={handleLogin}>
-            <Heading textAlign='center' fontFamily='Abel,open-sans'> Login </Heading>
+            <Heading textAlign='center' fontFamily='Poppins,open-sans' fontWeight='400' fontSize='40px'> Login to you account</Heading>
 
-            <Box flexDirection="column" width={['340px', '600px']}>
+            <Box flexDirection="column" >
                 <Label htmlFor="email" py={2}>
                     Email
                 </Label>
@@ -71,13 +71,13 @@ const LoginForm = () => {
 
             <P onClick={() => navigate('/forgot')}>Forgot password</P>
 
-            <Box justifyContent='center' marginTop={2}>
+            <Box justifyContent='center' alignItems='center' marginTop={2}>
                 <Button
                     px={5}
                     type="submit"
                     py={3}
-                    width={["73%", "full"]}
-                    borderRadius={100}
+                    width={["full"]}
+                    borderRadius={12}
                     alignItems="center"
                     justifyContent="center"
                     fontSize={["1.2rem", "1.4rem"]}
@@ -87,11 +87,12 @@ const LoginForm = () => {
                     color="white"
                     disabled={isLoading}
                     className={isLoading ? "loading" : ''}
-
                 >
                     Login
                 </Button>
             </Box>
+
+            <hr style={{ border: '1px solid #909090' }} />
             <P
                 fontSize={"1.1rem"}
                 py={"0.5rem"}
@@ -101,7 +102,7 @@ const LoginForm = () => {
 
             >
 
-                Don't have an account <Link to={'/register'}>Register Here</Link>
+                Don't have an account <Link style={{ color: '#EF233C' }} to={'/register'}>Register Here</Link>
 
             </P>
             {

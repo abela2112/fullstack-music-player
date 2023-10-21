@@ -11,8 +11,8 @@ const PlayList = ({ songs }) => {
     return (
         <AnimationBox width='full'>
             <Box bg='transparent' p={1} width='full'>
-                <Box flexDirection='column' bg='white' px={[0, 5]} py={4} width={['full', 'auto']}>
-                    <Box justifyContent='space-between' width={['full', '70%']} >
+                <Box flexDirection='column' bg='white' px={[2, 3]} py={3} width={['full']}>
+                    <Box justifyContent='space-between' width={['full', '70%']}  >
                         <Heading fontSize='18px' color='#2B2D42'>New Played</Heading>
                         <Box justifyContent='space-between' display={['none', 'flex']} >
                             <Button px={3} py={1} mx={2} borderRadius={20} bg={'#F2F5F5'} border="1px solid #909090" justifyContent='center' alignItems='center'>Today</Button>
@@ -20,7 +20,7 @@ const PlayList = ({ songs }) => {
                             <Button px={3} py={1} mx={2} bg={'#F2F5F5'} borderRadius={20} border="1px solid #909090" justifyContent='center' alignItems='center'> Month</Button>
                         </Box>
                     </Box>
-                    <Box flexDirection={'column'} px={1}>
+                    <Box flexDirection={'column'} px={1} width='full'>
                         {songs.length > 0 && songs.length > 4 ? songs.slice(0, 4).map((song, i) => (<Music key={i} song={song} />)
                         ) : (
                             songs.map((song, i) => (<Music key={i} song={song} i={i} />))

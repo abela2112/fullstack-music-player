@@ -21,9 +21,9 @@ const Controls = ({ isPlaying, repeat, setRepeat, shuffle, setShuffle, currentSo
 
     <Box display={['flex', 'none']} justifyContent='flex-end' pr={2}>
       {isPlaying ? (
-        <FaPauseCircle size={45} color="#2B2D42" onClick={handlePlayPause} className="cursor-pointer" />
+        <FaPauseCircle size={45} color="#EF233C" onClick={handlePlayPause} className="cursor-pointer" />
       ) : (
-        <FaPlayCircle size={45} color="#2B2D42" onClick={handlePlayPause} className="cursor-pointer" />
+          <FaPlayCircle size={45} color="#EF233C" onClick={handlePlayPause} className="cursor-pointer" />
       )}
     </Box>
   </Box>

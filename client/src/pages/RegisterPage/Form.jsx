@@ -10,14 +10,14 @@ const FormPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const [error, setError] = useState('')
-
+    const [isLoading, setIsLoading] = useState(false)
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [picture, setPicture] = useState("");
 
-    const { isLoading } = useSelector((state) => state.user)
+
 
     useEffect(() => {
         if (error) {
@@ -38,10 +38,15 @@ const FormPage = () => {
             if (password !== confirmPassword) {
                 throw new Error("password doesn't match");
             }
+            setIsLoading(true)
             const data = await createUserAPI(formData)
-            console.log(data);
+            if (data) {
+                setIsLoading(false)
             navigate('/verifyEmail')
+            }
+
         } catch (error) {
+            setIsLoading(false)
             if (error?.response?.data?.msg) { setError(error?.response?.data?.msg) }
             else { setError(error.message) }
         }
@@ -49,12 +54,13 @@ const FormPage = () => {
 
 
     return (
-        <Form width={['full', "600px"]}
+        <Form width={['340px', '80%', '70%']}
             height={['full', "auto"]}
             alignItems='center'
             justifyContent='center'
             onSubmit={handleRegister}>
-            <Heading textAlign='center' fontFamily='Abel,open-sans'>Create new Account</Heading>
+            <Heading textAlign='start' fontFamily='Poppins,open-sans' fontSize='40px' fontWeight='400'>WELCOME BACK</Heading>
+            <P color='#636364' fontSize={['14px', '18px']}>Welcome back! Please enter your details.</P>
                 <Box flexDirection="column">
                     <Label htmlFor="title" py={2} >
                         Full Name
@@ -69,13 +75,13 @@ const FormPage = () => {
                     />
                 </Box>
 
-            <Box flexDirection="column" width={['340px', 'full', '600px']}>
+            <Box flexDirection="column" >
                 <Label htmlFor="email" py={2}>
                     Email
                 </Label>
                 <Input
                     type="email"
-                    placeholder="yourEmail.com"
+                    placeholder="yourEmail@gmail.com"
                     px={3}
                     py={[1, 3]}
                     value={email}
@@ -83,7 +89,7 @@ const FormPage = () => {
                 />
             </Box>
             <Box flexDirection="column">
-                <Label htmlFor="title" py={2}>
+                <Label htmlFor="password" py={2}>
                     password
                 </Label>
                 <Input
@@ -107,7 +113,7 @@ const FormPage = () => {
                             placeholder="confirm password"
                             autoComplete="new-password"
                             px={3}
-                    py={[1, 3]}
+                    py={[2]}
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />
@@ -124,13 +130,13 @@ const FormPage = () => {
                         />
             </Box>
 
-            <Box justifyContent='center' marginTop={2}>
+            <Box justifyContent='center' alignItems='center' marginTop={2}>
                 <Button
                     px={5}
                     type="submit"
                     py={3}
-                    width={["73%", "full"]}
-                    borderRadius={100}
+                    width={["full"]}
+                    borderRadius={'12px'}
                     alignItems="center"
                     justifyContent="center"
                     fontSize={["1.2rem", "1.4rem"]}
@@ -142,7 +148,7 @@ const FormPage = () => {
                     className={isLoading ? "loading" : ''}
 
                 >
-                    Register
+                    {isLoading ? '' : 'Register'}
                 </Button>
             </Box>
             <P
@@ -154,7 +160,7 @@ const FormPage = () => {
 
             >
 
-                have an account <Link to={'/'}>Login here</Link>
+                have an account <Link style={{ color: '#EF233C' }} to={'/'}>Login here</Link>
 
             </P>
             {

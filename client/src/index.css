@@ -1,7 +1,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Abel&family=Nunito:wght@200;500;600;800&family=Open+Sans:wght@400;500;600&family=Poppins:ital,wght@0,400;0,500;0,700;1,800&family=Roboto:wght@400;700&family=Rubik:ital,wght@0,300;0,400;0,500;1,400&display=swap');
 
-
+*{
+  
+  box-sizing: border-box;
+}
 .active {
     /* font-style: italic; */
     background-color: #F92457 !important; 
@@ -75,6 +78,8 @@
     background: transparent;
     line-height: 30px;
     text-align: center;
+    display: flex;
+    margin: 0 .5rem;
   }
 .error{
   padding: 1rem;
@@ -84,14 +89,15 @@
 }
 
 
-  button.loading {
-position: relative;
+  .loading {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    position: relative;
   }
-  button.loading::before {
-    position: absolute;
+  .loading::before {
     
-    right: 20%;
-   z-index: 10;
+    
+    z-index: 10;
     margin-right: 0.5rem/* 8px */;
     height: 1rem/* 16px */;
     width: 1rem/* 16px */;
