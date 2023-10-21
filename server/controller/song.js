@@ -11,6 +11,8 @@ const createSong = async (req, res) => {
   const { error } = validate(req.body);
   if (error) throw new BadRequestError(error?.details[0].message);
   const { img, song } = req.files;
+  console.log("img", img);
+  console.log("song", song);
   const imageFile = img[0];
   const songFile = song[0];
   const imagExt = imageFile?.originalname?.split(".")[1];
@@ -34,7 +36,7 @@ const createSong = async (req, res) => {
     userCreated: id,
   });
 
-  res.status(StatusCodes.OK).json(newSong);
+  res.status(StatusCodes.CREATED).json(newSong);
   console.log("create song");
 };
 

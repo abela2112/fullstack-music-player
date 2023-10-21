@@ -17,7 +17,6 @@ const validate = (song) => {
   const schema = Joi.object({
     title: Joi.string().required(),
     song: Joi.string().required(),
-
     img: Joi.string().required(),
     // language: Joi.string().required(),
     // catagory: Joi.string().required(),

@@ -1,6 +1,7 @@
 import { takeEvery, put, call } from "redux-saga/effects";
 import {
   createSong,
+  createSongFailure,
   createSongSuccess,
   deleteSong,
   getSongsFailure,
@@ -39,7 +40,7 @@ function* workCreateSong(action) {
     yield put(createSongSuccess(data?.data));
     yield put(getSongsFetch());
   } catch (error) {
-    console.log(error);
+    yield put(createSongFailure(error?.response?.data))
   }
 }
 

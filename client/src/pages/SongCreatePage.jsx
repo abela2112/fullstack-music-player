@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import axios from "axios";
 import { Box, Button, Form, Heading, Input, Label } from "../components/Styles";
@@ -17,8 +17,15 @@ const SongCreatePage = () => {
     const [country, setCountry] = useState("");
     const [coverImage, setCoverImage] = useState("");
     const [music, setMusic] = useState("");
-    const { isLoading } = useSelector(state => state.songs)
+    const { isLoading, errorMessage } = useSelector(state => state.songs)
 
+    useEffect(() => {
+        if (errorMessage) {
+            setTimeout(() => {
+                dispatch(setError(''))
+            }, 5000);
+        }
+    }, [errorMessage])
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -82,7 +89,7 @@ const SongCreatePage = () => {
                     </Box>
                     <Box flexDirection="column">
                         <Label htmlFor="artistName" py={2}>
-                            Artist
+                            Genre
                         </Label>
                         <Input
                             type="text"
@@ -201,6 +208,7 @@ const SongCreatePage = () => {
                             Cancel
                         </Button>
                     </Box>
+                    {errorMessage && <p className="error">{errorMessage}</p>}
                 </Form>
             </Box>
         </Box>

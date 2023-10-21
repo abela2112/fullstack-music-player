@@ -38,7 +38,7 @@ const LoginForm = () => {
             alignItems='center'
             justifyContent='center'
             onSubmit={handleLogin}>
-            <Heading textAlign='center' fontFamily='Poppins,open-sans' fontWeight='400' fontSize='40px'> Login to you account</Heading>
+            <Heading textAlign='center' fontFamily='Poppins,open-sans' fontWeight='400' fontSize='40px'> Login to your account</Heading>
 
             <Box flexDirection="column" >
                 <Label htmlFor="email" py={2}>

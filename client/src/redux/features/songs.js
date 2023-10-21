@@ -32,7 +32,7 @@ const songSlice = createSlice({
     createSongFailure: (state, action) => {
       state.isLoading = false;
       console.log(action);
-      state.error = action.payload;
+      state.error = action.payload?.msg;
     },
     updateSong: (state) => {
       state.isLoading = true;

@@ -51,7 +51,7 @@ app.use(
   "/api/song/create",
   uploadMiddleware.fields([
     { name: "song", maxCount: 1 },
-    { name: "img", maxCount: 8 },
+    { name: "img", maxCount: 1 },
   ]),
   auth,
   createSong
