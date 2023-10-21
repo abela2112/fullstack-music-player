@@ -64,7 +64,8 @@ const updateSong = async (req, res) => {
       return newpath;
     });
   }
-  const song = await Song.findByIdAndUpdate(
+  const song = await Song.findById(id);
+  const newSong = await Song.findByIdAndUpdate(
     id,
     {
       title,
@@ -72,13 +73,13 @@ const updateSong = async (req, res) => {
       genre,
       language,
       country,
-      img: newFile[1],
-      song: newFile[0],
+      img: newFile[1] || song?.img,
+      song: newFile[0] || song?.song,
     },
     { new: true }
   );
 
-  res.status(200).json(song);
+  res.status(200).json(newSong);
 };
 
 const deleteSong = async (req, res) => {
