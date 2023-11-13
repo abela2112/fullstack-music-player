@@ -61,7 +61,7 @@ const FormPage = () => {
             onSubmit={handleRegister}>
             <Heading textAlign='start' fontFamily='Poppins,open-sans' fontSize='40px' fontWeight='400'>WELCOME BACK</Heading>
             <P color='#636364' fontSize={['14px', '18px']}>Welcome back! Please enter your details.</P>
-                <Box flexDirection="column">
+            <Box flexDirection="column" width='full'>
                     <Label htmlFor="title" py={2} >
                         Full Name
                     </Label>
@@ -73,7 +73,7 @@ const FormPage = () => {
                     />
                 </Box>
 
-            <Box flexDirection="column" >
+            <Box flexDirection="column" width='full' >
                 <Label htmlFor="email" py={2}>
                     Email
                 </Label>
@@ -85,7 +85,7 @@ const FormPage = () => {
                     onChange={(e) => setEmail(e.target.value)}
                 />
             </Box>
-            <Box flexDirection="column">
+            <Box flexDirection="column" width='full'>
                 <Label htmlFor="password" py={2}>
                     password
                 </Label>
@@ -98,7 +98,7 @@ const FormPage = () => {
                 />
             </Box>
 
-                    <Box flexDirection="column" >
+            <Box flexDirection="column" width='full' >
                         <Label htmlFor="title" py={2}>
                             confirm password
                         </Label>
@@ -111,7 +111,7 @@ const FormPage = () => {
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />
                     </Box>
-                    <Box flexDirection="column">
+            <Box flexDirection="column" width='full'>
                         <Label htmlFor="profile" py={2}>
                             profile photo
                         </Label>

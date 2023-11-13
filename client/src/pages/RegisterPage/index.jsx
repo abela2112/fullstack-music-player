@@ -15,7 +15,7 @@ const RegisterPage = () => {
           </Box>
         </Box>
         <Box>
-          <Img src={backgroundRegister} width={"full"} height={"full"} objectFit="cover" display={['none', 'none', 'none', 'block']} />
+          <Img src={backgroundRegister} width={"full"} height={"100vh"} objectFit="cover" display={['none', 'none', 'none', 'block']} />
         </Box>
       </GridBox>
     </Box>
