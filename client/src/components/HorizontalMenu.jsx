@@ -34,10 +34,10 @@ const HorizontalMenu = () => {
     return (
 
 
-        <Box mt={[1, 2, 3]} display={["flex", "flex", "flex", "none"]}  >
-            <Slider />
-        </Box>
-
+        // <Box mt={[1, 2, 3]} display={["flex", "flex", "flex", "none"]}  >
+        //     <Slider />
+        // </Box>
+        <div></div>
     )
 }
 

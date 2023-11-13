@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Button, Img, Input, Label } from '../components/Styles'
+import { Box, Button, Img, Input, Label, Title } from '../components/Styles'
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserLogOut } from '../redux/features/user';
 
@@ -9,13 +9,13 @@ const ProfilePage = () => {
     const dispatch = useDispatch();
     const baseUrl = import.meta.env.VITE_BASE_URL
     return (
-        <Box width='full' justifyContent={'start'} >
-            <Box flexDirection='column' >
-                <Box justifyContent='center' my={2} >
-
-                    <Img width={'200px'} src={`${baseUrl}/${user?.picture}`} borderRadius='50%' />
-
+        <Box width='full' flexDirection='column'>
+            <Title fontSize='22px' >Profile</Title>
+            <Box display='flex' gap='1rem' width='80%' >
+                <Box justifyContent='center' flex={1} my={2} >
+                    <Img width={'200px'} height={'200px'} src={"https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"} borderRadius='50%' />
                 </Box>
+                <Box flexDirection='column' flex={2} >
                 <Box flexDirection={["column", "row"]} py={2}>
                     <Label htmlFor="artistName" py={2}>
                         Name:
@@ -85,6 +85,7 @@ const ProfilePage = () => {
                 </Box>
 
 
+                </Box>
             </Box>
         </Box>
 
@@ -92,3 +93,4 @@ const ProfilePage = () => {
 }
 
 export default ProfilePage
+//src={`${baseUrl}/${user?.picture}`}

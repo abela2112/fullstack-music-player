@@ -42,8 +42,8 @@ const SongCard = ({ song, i }) => {
 
 
     return (
-        <SongCardBox flexDirection='column' width={["160px", "200px"]} m={[1, 4]} borderRadius={10}>
-            <Box flexDirection='column' height={["160px", "200px"]} position='relative' >
+        <SongCardBox flexDirection='column' width={["300px", "200px"]} m={[1, 3]} borderRadius={10}>
+            <Box flexDirection='column' height={["300px", "200px"]} position='relative' >
                 <Box position='absolute' inset='0' justifyContent='center' alignItems='center' width='full' height='full'>
                     <PlayPause song={song} i={i} />
                 </Box>
@@ -52,8 +52,8 @@ const SongCard = ({ song, i }) => {
             </Box>
             <Box justifyContent='space-between' mt={3} position='relative'>
                 <Box flexDirection='column'>
-                    <FlexNavLink color={'black'} to={`/home/songDetails/${song?._id}`} py={2} fontWeight={'500'} fontSize={['1rem', '1.4rem']}>{song?.title}</FlexNavLink>
-                    <FlexNavLink color={'#909090'} to={'/home/artist'} py={2} fontSize={['14px', '1rem']}>{song?.artist}</FlexNavLink>
+                    <FlexNavLink color={'black'} to={`/home/songDetails/${song?._id}`} py={1} fontWeight={'500'} fontSize={['1rem', '1.3rem']}>{song?.title}</FlexNavLink>
+                    <FlexNavLink color={'#909090'} to={'/home/artist'} fontWeight={'300'} py={2} fontSize={['14px', '1rem']}>{song?.artist}</FlexNavLink>
                 </Box>
 
                 <Box alignItems='center' justifyContent='start' position='relative'>

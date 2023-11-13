@@ -71,14 +71,15 @@ const SongCreatePage = () => {
         <Box
             width="full"
             flexDirection="column"
-            justifyContent={["start", "center"]}
-            alignItems="center"
+
             bg={'white'}
         >
-            <Box width={["full", "80%", "70%", "60%"]} p={[2, 5]} boxShadow="0px 4px 8px rgba(0, 0, 0, 0.1)" justifyContent='center' alignItems='center'>
-                <Form p={2} width={['full', '80%']} onSubmit={handleSubmit}>
+            <Box width={["full"]} p={[2, 5]} boxShadow="0px 4px 8px rgba(0, 0, 0, 0.1)" flexDirection='column'>
+
+                <Form p={2} width={['full']} onSubmit={handleSubmit} display='flex' >
                     <Heading fontSize={['36px']} fontWeight='500'>Add songs</Heading>
-                    <Box flexDirection="column">
+                    <Box flexWrap='wrap'>
+                        <Box flexDirection="column" width='400px' mx={3}>
                         <Label htmlFor="title" py={2}>
                             Title
                         </Label>
@@ -89,7 +90,7 @@ const SongCreatePage = () => {
                             onChange={(e) => setTitle(e.target.value)}
                         />
                     </Box>
-                    <Box flexDirection="column" >
+                        <Box flexDirection="column" width='400px' mx={3}>
                         <Label htmlFor="artistName" py={2}>
                             Artist
                         </Label>
@@ -100,7 +101,7 @@ const SongCreatePage = () => {
                             onChange={(e) => setArtist(e.target.value)}
                         />
                     </Box>
-                    <Box flexDirection="column">
+                        <Box flexDirection="column" width='400px' mx={3}>
                         <Label htmlFor="artistName" py={2}>
                             Genre
                         </Label>
@@ -111,7 +112,7 @@ const SongCreatePage = () => {
                             onChange={(e) => setGenre(e.target.value)}
                         />
                     </Box>
-                    <Box flexDirection="column" >
+                        <Box flexDirection="column" width='400px' mx={3}>
                         <Label htmlFor="title" py={2}>
                             Language
                         </Label>
@@ -123,7 +124,7 @@ const SongCreatePage = () => {
                         />
                     </Box>
 
-                    <Box flexDirection="column">
+                        <Box flexDirection="column" width='400px' mx={3}>
 
                         <Label htmlFor="country" py={2}>
                             country
@@ -136,7 +137,7 @@ const SongCreatePage = () => {
                             onChange={(e) => setCountry(e.target.value)}
                         />
                     </Box>
-                    <Box flexDirection="column" >
+                        <Box flexDirection="column" width='400px' mx={3}>
 
                         <Label htmlFor="cover-photo" py={2}>
                             cover Photo
@@ -147,7 +148,7 @@ const SongCreatePage = () => {
                             onChange={(e) => setCoverImage(e.target.files)}
                         />
                     </Box>
-                    <Box flexDirection="column" >
+                        <Box flexDirection="column" width='400px' mx={3}>
                         <Label htmlFor="title" py={2}>
                             Music
                         </Label>
@@ -157,8 +158,8 @@ const SongCreatePage = () => {
                             onChange={(e) => setMusic(e.target.files)}
                         />
                     </Box>
-                    <Box flexDirection={['column', 'row']} justifyContent={["center", "flex-end"]} mt={4}>
-
+                    </Box>
+                    <Box width='full' flexDirection={['column', 'row']} justifyContent={["center", "flex-end"]} mt={4}>
                         <Button
                             type="submit"
                             width={["100%", '300px']}

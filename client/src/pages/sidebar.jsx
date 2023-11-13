@@ -10,7 +10,12 @@ import { setUserLogOut } from "../redux/features/user";
 import { Box, Button, FlexNavLink, Heading, Img, Span, Typography } from "../components/Styles";
 import { useLocation, useNavigate } from "react-router-dom";
 import { logo } from "../assets";
-
+import styled from "@emotion/styled";
+const Logo = styled.span`
+   font-weight :600 ;
+   font-size: 34px;
+   color: darkblue;
+  `
 const navItems = [
     {
         text: 'MENU',
@@ -70,15 +75,17 @@ const Sidebar = () => {
     return (
         <Box
             display={["none", "none", "none", "flex"]}
+            position='fixed'
+            top={'0px'}
+            bottom={0}
             color={"#fff"}
             bg={"#E8ECEF"}
             flexDirection={"column"}
             borderRadius={5}
-            p={4}
-            minHeight={"screen"}
+            p={2}
+            height={'calc(100vh)'}
             justifyContent='flex-start'
-            width={"400px"}
-            overflow='hidden'
+            width={"320px"}
         >
             <Box
                 color="white"
@@ -88,7 +95,8 @@ const Sidebar = () => {
                 borderRadius={5}
 
             >
-                <Img src={logo} width='full' />
+
+                <Logo>DROP</Logo>
                 <Box flexDirection={"column"} >
                     {
                         navItems.map(({ text, icon }) => {
@@ -111,7 +119,7 @@ const Sidebar = () => {
                 </Box>
             </Box>
 
-            <Box width='full' justifyContent='center'>
+            {/* <Box width='full' justifyContent='center'>
                 <Button
                     py={3}
                     borderRadius={10}
@@ -131,7 +139,7 @@ const Sidebar = () => {
                     Logout
                 </Button>
 
-            </Box>
+            </Box>*/}
         </Box>
     );
 };

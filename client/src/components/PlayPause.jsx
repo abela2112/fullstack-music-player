@@ -16,7 +16,7 @@ const PlayPause = ({ song, i }) => {
     }
 
     return (
-        <Box px={2}>{isPlaying && activeSong?._id === song?._id ? <FaPauseCircle color='#EF233C' size={35} onClick={handlePauseClick} className="cursor-pointer" /> : <FaPlayCircle color='#EF233C' size={35} onClick={handlePlayClick} className="cursor-pointer" />}</Box>
+        <Box px={2}>{isPlaying && activeSong?._id === song?._id ? <FaPauseCircle color='gray' size={35} onClick={handlePauseClick} className="cursor-pointer" /> : <FaPlayCircle color='#2a2b28' size={35} onClick={handlePlayClick} className="cursor-pointer" />}</Box>
     )
 }
 

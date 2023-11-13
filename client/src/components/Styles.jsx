@@ -46,7 +46,7 @@ export const P = styled.p`
   }
 `;
 
-export const Heading = styled.h1`
+export const Heading = styled.span`
 ${typography}
   ${textAlign}
 ${color}
@@ -66,6 +66,7 @@ ${typography}
 ${fontStyle}
 ${fontSize}
 ${width}
+${flexbox}
 display: flex;
 flex-direction: column;
 `;
@@ -113,6 +114,8 @@ export const Span = styled.span`
     ${space}
     
     ${typography}
+     font-family: 'Poppins', sans-serif;
+
 `;
 
 export const Dialog = styled.dialog`
@@ -189,10 +192,11 @@ const darkTheme = {
   color: "#FFFFFF",
 };
 
-export const Title = styled.h2`
+export const Title = styled.span`
   ${typography}
   ${fontSize}
   ${fontWeight}
+
 `;
 
 export const Input = styled.input`
@@ -209,7 +213,6 @@ export const Input = styled.input`
   padding: 10px 5px 10px 20px;
   letter-spacing: .5px;
   font-family: 'Poppins, sans-serif';
-
   border: 2px solid #b0b0ac;;
   /* border-bottom: 2px solid #f0f0f0;  */
   &:valid {
@@ -346,12 +349,13 @@ export const NavLinkButton = styled(NavLink)(
 
   })
 
-export const Typography = styled.p`
+export const Typography = styled.span`
   ${fontWeight}
   ${fontSize}
     ${space}
     ${typography}
     ${color}
+    padding: 10px;
 `;
 export const FlexBetween = styled(Box)({
   display: 'flex',
@@ -387,16 +391,14 @@ export const Search = styled.input`
   ${typography}
   ${color}
   outline: none;
-  border: 1px solid gray;
-  border-radius: 80px;
   font-size: 1.1rem;
   position: relative;
   :focus {
     color: black;
-    border: 2px solid black;
+   
   }
   ::placeholder {
     text-transform: capitalize;
   }
-  width: auto;
+  
 `;

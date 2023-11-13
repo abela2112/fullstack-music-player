@@ -31,8 +31,8 @@ const Music = ({ song, i }) => {
                 <PlayPause song={song} i={i} />
                 <Img width={'50px'} src={`${import.meta.env.VITE_BASE_URL}/${song?.img}`} alt='songphoto' borderRadius={10} display={['none', 'block']} />
                 <Box flexDirection='column' ml={2} justifyContent='start' >
-                    <Span fontSize={'1.1rem'} fontWeight={'400'} py={1} >{song?.title}</Span>
-                    <Span fontSize='14px'>{song?.artist}</Span>
+                    <Span fontSize={'1.1rem'} py={1} >{song?.title}</Span>
+                    <Span fontWeight={'300'} fontSize='14px'>{song?.artist}</Span>
                 </Box>
             </Box>
             <Box justifyContent="space-around" alignItems="center" display={['flex']}>

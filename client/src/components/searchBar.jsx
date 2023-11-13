@@ -14,14 +14,23 @@ const SearchBar = () => {
   }
   return (
     <Form flexDirection={'row'} width={'auto'} position='relative' alignItems='center' mx={2} onSubmit={handleSubmit}>
-      <Button bg='transparent' color='#0c0b0b' outline='none' border='none' position='absolute' top={2}
-        left='0' zIndex={10} borderRadius='10px'>
-        <AiOutlineSearch size={30} color='#0c0b0b' /></Button>
+      <Box
+        display='flex'
+        alignItems='center'
+
+        borderRadius={'10px'} color='gray'
+        border={"1px solid gray"}
+        padding="2px"
+        bg="#E8ECEF"
+
+      >
+        <AiOutlineSearch size={30} />
       <Search
         value={searchTerm}
         onChange={(e) => { setSearchTerm(e.target.value) }}
-        placeholder='Search...' width={'full'} autoComplete='none' fontSize={'1.1rem'} bg={'white'} borderRadius={'80px'} color='gray' padding={'0.75rem 2rem'} borderBottom='1px solid black' />
-    </Form>
+          placeholder='Search...' width={'full'} autoComplete='none' fontSize={'1.1rem'} padding={'0.5rem 2rem 0.75rem 0'} border='none' flex={2} bg="#E8ECEF" />
+
+      </Box></Form>
   )
 }
 
