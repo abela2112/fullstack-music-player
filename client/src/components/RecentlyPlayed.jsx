@@ -37,7 +37,7 @@ const RecentlyPlayed = ({ songs, i }) => {
                         <Box position='absolute' inset='0' justifyContent='center' alignItems='center' width='full' height='full'>
                             <PlayPause song={songs[0] && songs[0]} i={0} />
                         </Box>
-                        <Img src={songs[0] && songs[0]?.img} alt='songphoto' objectFit='cover' />
+                        <Img src={`${import.meta.env.VITE_BASE_URL}/${songs[0] && songs[0]?.img}`} alt='songphoto' objectFit='cover' />
 
                     </Box>
                     <Box justifyContent='space-between' mt={3} position='relative'>
