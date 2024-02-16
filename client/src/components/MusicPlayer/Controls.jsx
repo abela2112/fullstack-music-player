@@ -16,7 +16,7 @@ const Controls = ({ isPlaying, repeat, setRepeat, shuffle, setShuffle, currentSo
         <BsFillPlayBtnFill size={45} color="#2B2D42" onClick={handlePlayPause} className="cursor-pointer" />
       )}
       {currentSongs?.length && <MdSkipNext size={30} color="#2B2D42" onClick={handleNextSong} />}
-      <BsShuffle size={30} color={shuffle ? 'red' : '#2B2D42'} onClick={() => setShuffle((prev) => !prev)} className="hidden sm:block cursor-pointer" />
+      <BsShuffle size={30} color={shuffle ? 'red' : '#2B2D42'} onClick={() => setShuffle((prev) => !prev)} className="hidden cursor-pointer" />
     </Box>
 
     <Box display={['flex', 'none']} justifyContent='flex-end' pr={2}>

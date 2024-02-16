@@ -22,7 +22,7 @@ const Player = ({ activeSong, isPlaying, volume, seekTime, onEnded, onTimeUpdate
 
   return (
     <audio
-      src={`${import.meta.env.VITE_BASE_URL}/${activeSong?.song}`}
+      src={`http://localhost:5000/${activeSong?.song}`}
       ref={ref}
       loop={repeat}
       onEnded={onEnded}
@@ -33,3 +33,4 @@ const Player = ({ activeSong, isPlaying, volume, seekTime, onEnded, onTimeUpdate
 };
 
 export default Player;
+//import.meta.env.VITE_BASE_URL

@@ -12,6 +12,8 @@ import { BsThreeDots } from 'react-icons/bs'
 import Modal from './Modal'
 import MenuButton from './MenuButton'
 import { userFavoritesAPI, userPlaylistsAPI } from '../api/userApi'
+import { discoverPhoto } from '../assets'
+import { Link } from 'react-router-dom'
 //import { setModalOpen } from '../redux/features/songs'
 
 
@@ -44,16 +46,20 @@ const SongCard = ({ song, i }) => {
     return (
         <SongCardBox flexDirection='column' width={["300px", "200px"]} m={[1, 3]} borderRadius={10}>
             <Box flexDirection='column' height={["300px", "200px"]} position='relative' >
-                <Box position='absolute' inset='0' justifyContent='center' alignItems='center' width='full' height='full'>
+                <Box position='absolute' inset='0' justifyContent='center' alignItems='center' width='100%' height='100%'>
                     <PlayPause song={song} i={i} />
                 </Box>
-                <Img src={`${import.meta.env.VITE_BASE_URL}/${song?.img}`} borderRadius={10} alt='songphoto' objectFit='cover' />
+                <Img src={`http://localhost:5000/${song?.img}`} borderRadius={10} alt='songphoto' objectFit='cover' />
 
             </Box>
             <Box justifyContent='space-between' mt={3} position='relative'>
                 <Box flexDirection='column'>
-                    <FlexNavLink color={'black'} to={`/home/songDetails/${song?._id}`} py={1} fontWeight={'500'} fontSize={['1rem', '1.3rem']}>{song?.title}</FlexNavLink>
-                    <FlexNavLink color={'#909090'} to={'/home/artist'} fontWeight={'300'} py={2} fontSize={['14px', '1rem']}>{song?.artist}</FlexNavLink>
+                    <Link color={'black'} to={`/songDetails/${song?._id}`} py={1} fontWeight={'500'} fontSize={['1rem', '1.3rem']}>
+
+                        {song?.title}</Link>
+                    <Link color={'#909090'} to={'/artist'} fontWeight={'300'} py={2} fontSize={['14px', '1rem']}>
+
+                        {song?.artist}</Link>
                 </Box>
 
                 <Box alignItems='center' justifyContent='start' position='relative'>
@@ -64,13 +70,14 @@ const SongCard = ({ song, i }) => {
                 </Box>
                 {isClicked && <MenuButton user={user} song={song} handleOpenModal={handleOpenModal} />}
             </Box>
-            <Modal
+            {isModalOpen && <Modal
                 isOpen={isModalOpen}
                 hasCloseBtn={true}
                 onClose={handleCloseModal}
-                id={id} />
+                id={id} />}
         </SongCardBox>
     )
 }
 
 export default SongCard
+//src={`${import.meta.env.VITE_BASE_URL}/${song?.img}`}

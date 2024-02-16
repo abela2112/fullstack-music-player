@@ -10,7 +10,7 @@ const RegisterPage = () => {
       <GridBox >
         <Box bg={"#F8F8F8"} width={['full']} height={['full']} px={[1, 3, 4, 5]} py={[2, 3, 4]} borderRadius={10} justifyContent={['center']} alignItems='center'>
 
-          <Box width={['70%', '800px']} justifyContent={['center', 'center', 'start']} alignItems='center'>
+          <Box width={['90%', '800px']} justifyContent={['center', 'center', 'start']} alignItems='center'>
             <FormPage />
           </Box>
         </Box>

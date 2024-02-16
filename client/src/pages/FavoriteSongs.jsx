@@ -8,6 +8,7 @@ import Loader from '../components/Loader'
 import { Box } from '../components/Styles'
 import { getUserFavoritesSongAPI } from '../api/userApi'
 import PlayerWidget from '../widget/PlayerWidget'
+import MusicPlayer from '../components/MusicPlayer'
 
 const FavoriteSongs = () => {
     const dispatch = useDispatch()
@@ -33,7 +34,7 @@ const FavoriteSongs = () => {
                 {favoriteSongs?.length > 0 ? favoriteSongs.map((song, i) => (<SongCard key={i} song={song} i={i} />)) : <p>no favorite songs</p>}
 
             </Box>
-            {activeSong && <PlayerWidget />}
+            {activeSong && <MusicPlayer />}
 
         </Box>
     )

@@ -4,6 +4,7 @@ import { Box, Heading, NavLinkButton } from '../components/Styles'
 import { useSelector } from 'react-redux'
 import SongCard from '../components/SongCard'
 import PlayerWidget from '../widget/PlayerWidget'
+import { Link } from 'react-router-dom'
 const MySongs = () => {
 
     const [songs, setSongs] = useState([])
@@ -22,10 +23,9 @@ const MySongs = () => {
             <Box flexWrap='wrap' width='full'>
                 {songs.length > 0 && songs.map((song, i) => (<SongCard song={song} i={i} key={i} />))}
             </Box>
-            <NavLinkButton backgroundColor='#EF233C' to='/home/add songs'>Add Your Songs</NavLinkButton>
-            {activeSong && <PlayerWidget />}
-            <Box flexDirection={['column', 'column', 'row']}>
-            </Box>
+            <Link to='/add songs'>Add Your Songs</Link>
+
+
 
         </Box>
     )

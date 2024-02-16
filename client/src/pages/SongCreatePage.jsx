@@ -71,12 +71,10 @@ const SongCreatePage = () => {
         <Box
             width="full"
             flexDirection="column"
-
-            bg={'white'}
         >
-            <Box width={["full"]} p={[2, 5]} boxShadow="0px 4px 8px rgba(0, 0, 0, 0.1)" flexDirection='column'>
+            <Box width={["full"]} p={[2]} boxShadow="0px 4px 8px rgba(0, 0, 0, 0.1)" flexDirection='column'>
 
-                <Form p={2} width={['full']} onSubmit={handleSubmit} display='flex' >
+                <Form p={2} bg="sideBarColor" width={['full']} onSubmit={handleSubmit} display='flex' >
                     <Heading fontSize={['36px']} fontWeight='500'>Add songs</Heading>
                     <Box flexWrap='wrap'>
                         <Box flexDirection="column" width='400px' mx={3}>
@@ -160,7 +158,7 @@ const SongCreatePage = () => {
                     </Box>
                     </Box>
                     <Box width='full' flexDirection={['column', 'row']} justifyContent={["center", "flex-end"]} mt={4}>
-                        <Button
+                        {/* <Button
                             type="submit"
                             width={["100%", '300px']}
                             px={[0, 3]}
@@ -182,8 +180,8 @@ const SongCreatePage = () => {
                         <Button
                             type="button"
                             width={["100%", '300px']}
-                            px={[0, 3]}
-                            py={[2, 3]}
+                            px={[2]}
+                            py={[2]}
                             mx={2}
                             fontSize={"1.4rem"}
                             border="none"
@@ -197,7 +195,7 @@ const SongCreatePage = () => {
 
                         >
                             Cancel
-                        </Button>
+                        </Button> */}
                     </Box>
                     {error && <p className="error">{error}</p>}
                     {successMessage && <p className="success">{successMessage}</p>}

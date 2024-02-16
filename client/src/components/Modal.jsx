@@ -47,8 +47,8 @@ const Modal = ({ isOpen, hasCloseBtn = true, onClose, id }) => {
     }, [isModalOpen]);
 
     return (
-        <>
-            {<Dialog ref={modalRef} onKeyDown={handleKeyDown} width={['full', '600px', '700px']}>
+
+        <Dialog ref={modalRef} onKeyDown={handleKeyDown} width={['full', '600px', '700px']}>
                 <Box flexDirection='column' width='full' height='full' >
                     <Typography textAlign='start' fontSize={['1rem', '1.4rem']} my={1}>Are you sure you want to delete this item?
                     </Typography>
@@ -86,8 +86,8 @@ const Modal = ({ isOpen, hasCloseBtn = true, onClose, id }) => {
                     </Box>
                 </Box>
 
-            </Dialog >}
-        </>
+        </Dialog >
+
     )
 }
 

@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setFavoriteSongs } from '../redux/features/user'
 import MenuButton from './MenuButton'
 import { userFavoritesAPI } from '../api/userApi'
+import { notes } from '../assets'
 
 
 const Music = ({ song, i }) => {
@@ -26,20 +27,27 @@ const Music = ({ song, i }) => {
         dispatch(setFavoriteSongs(data))
     }
     return (
-        <Box my={2} bg={'#F2F5F5'} p={[0, 2]} justifyContent="space-between" alignItems="center">
-            <Box justifyContent="space-evenly" alignItems="center" >
-                <PlayPause song={song} i={i} />
-                <Img width={'50px'} src={`${import.meta.env.VITE_BASE_URL}/${song?.img}`} alt='songphoto' borderRadius={10} display={['none', 'block']} />
+        <Box mb={2} bg={'#F2F5F5'} p={2} justifyContent="space-between" alignItems="center" borderRadius={10}>
+            <Box alignItems="center" >
+                {/* <PlayPause song={song} i={i} /> */}
+                <Img width={'40px'} src={notes} alt='songphoto' borderRadius={10} display={['none', 'block']} />
                 <Box flexDirection='column' ml={2} justifyContent='start' >
-                    <Span fontSize={'1.1rem'} py={1} >{song?.title}</Span>
-                    <Span fontWeight={'300'} fontSize='14px'>{song?.artist}</Span>
+                    <Span fontSize={'16px'} fontWeight={'400'}>
+                        {song?.title}
+
+                    </Span>
+                    <Span fontWeight={'300'} fontSize='14px' color='textColor'>
+
+                        {song?.artist}
+                    </Span>
                 </Box>
             </Box>
-            <Box justifyContent="space-around" alignItems="center" display={['flex']}>
-                {favoriteSongs?.some((item) => item?._id === song._id) ? <AiFillHeart size={30} color='#EF233C' onClick={() => handleFavorites(song?._id)} /> : <AiOutlineHeart size={30} onClick={() => handleFavorites(song?._id)} />}
-                <BsThreeDots size={30}
+            <Box alignItems="center" >
+                {favoriteSongs?.some((item) => item?._id === song?._id) ? <AiFillHeart size={20} color='#EF233C' onClick={() => handleFavorites(song?._id)} /> : <AiOutlineHeart size={20} onClick={() => handleFavorites(song?._id)} />}
+                <BsThreeDots size={20}
+
                     onClick={() => setIsClicked(!isClicked)} className='icon' />
-                {isClicked && <MenuButton i song={song} user={user} handleOpenModal={handleOpenModal} />}
+                {isClicked && <MenuButton song={song} user={user} handleOpenModal={handleOpenModal} />}
             </Box>
 
 
@@ -52,3 +60,4 @@ const Music = ({ song, i }) => {
 
 
 export default Music
+//{`${import.meta.env.VITE_BASE_URL}/${song?.img}`}

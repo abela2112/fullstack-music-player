@@ -1,18 +1,16 @@
-import React, { useEffect } from 'react'
 
-import SongCard from '../components/SongCard'
-import { getSongsFetch } from '../redux/features/songs'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
-import { Box, GridContainer, Heading, } from '../components/Styles'
-import PlayList from '../widget/PlayList'
-import PlayerWidget from '../widget/PlayerWidget'
+import SongCard from '../components/SongCard'
+import { Box, Img } from '../components/Styles'
 
-import { artist } from '../data'
-import ArtistCard from '../components/ArtistCard'
 import styled from '@emotion/styled'
-import RecentlyPlayed from '../components/RecentlyPlayed'
-import { AiFillPlayCircle } from 'react-icons/ai'
+import { discoverBackground } from '../assets'
+import Music from '../components/Music'
+import ArtistsCard from '../components/ArtistsCard'
+import { useEffect } from 'react'
+import { getSongsFetch } from '../redux/features/songs'
+import MusicPlayer from '../components/MusicPlayer'
 
 const Title = styled.span`
     font-size: 24px;
@@ -23,36 +21,60 @@ const Title = styled.span`
 const DiscoverPage = () => {
     const dispatch = useDispatch()
     const { songs, isLoading } = useSelector(state => state.songs)
+    const { activeSong } = useSelector(state => state.player)
     useEffect(() => {
         dispatch(getSongsFetch())
     }, [])
     if (isLoading) {
         return <Loader />
     }
-    return (
+    return (<>
+
         <Box flexDirection={'column'} width='full' padding='20px'  >
+            <Box>
+                <Box flex={3} width={"full"} height={300}>
+                    <Img
+                        width={"full"}
+                        height="full"
+                        src={discoverBackground}
+                        borderRadius={10} />
+
+                </Box>
+                <Box display={['none', 'flex']} flex={1} flexDirection='column' ml={"1rem"}>
+                    <Title>Top Artists</Title>
+                    {[1, 2, 3, 4].map((song, key) => (<ArtistsCard key={key} />))}
+                </Box>
+            </Box>
             <Box width='full'>
                 <Box display='flex'
                     flex={3}
                     flexDirection='column'>
-                    <Title>Popular Artist</Title>
-                    <Box flexWrap='wrap' width='full' my={3} alignItems={['center']} >
+                    {/* <Title>Popular Artist</Title> */}
+                    {/* <Box flexWrap='wrap' width='full' my={3} alignItems={['center']} >
                         {artist.length > 0 && artist.slice(0, 4).map((song, i) => (<ArtistCard artist={song} key={i} />))}
-                    </Box>
-                    <Title>Trending Songs</Title>
+                    </Box> */}
+                    <Title>Discover</Title>
                     <Box my={3} flexWrap='wrap' justifyContent={['center', 'inherit']}>
-                        {songs.length > 0 && songs.slice(0, 3).map((song, i) => (<SongCard song={song} i={i} key={i} />))}
+                        {songs.length > 0 && songs?.map((song, i) => (<SongCard song={song} i={i} key={i} />))}
                     </Box>
-                    <RecentlyPlayed songs={songs} />
+                    {activeSong && <MusicPlayer />}
+                    {/* <RecentlyPlayed songs={songs} /> */}
+
 
                 </Box>
-                <Box display={['none', 'flex']} flexDirection='column' flex={1} gap={'1rem'}>
+                {/* <Box display={['none', 'flex']} flexDirection='column' flex={1} gap={'1rem'}>
                     <PlayList songs={songs} />
                     <PlayerWidget />
+                </Box> */}
+                <Box display={['none', 'flex']} flex={1} flexDirection='column' my={2} ml={"1rem"}>
+                    <Title>Recently Played</Title>
+                    {[1, 2, 3, 4].map((song, key) => (<Music key={key} />))}
                 </Box>
+
+
             </Box>
 
-        </Box>
+        </Box></>
     )
 }
 

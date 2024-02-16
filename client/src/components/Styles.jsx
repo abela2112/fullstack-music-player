@@ -40,7 +40,7 @@ export const P = styled.p`
   transition: all 0.5s ease-in-out;
   transform: translateY(0);
   font-family: 'Poppins', sans-serif;
-  
+  cursor: pointer;
   &:hover {
     transform: translateY(-10%);
   }
@@ -69,6 +69,7 @@ ${width}
 ${flexbox}
 display: flex;
 flex-direction: column;
+ gap:1rem;
 `;
 
 export const slideUp = keyframes`
@@ -101,8 +102,35 @@ export const Img = styled.img`
   ${layout}
   ${border}
   object-fit: cover;
+  
 `;
+export const ActionButton = styled.button`
+                    color: #fff;
+                    border: none;
+                    width:100%;
+                    font-size:16px;
+                    display:flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding:8px 12px;
+                    ${color}
+                    ${space}
+`
+export const OutlineButton = styled.button`
+                    color: ${({ theme }) => theme.colors.primaryColor};
+                    background-color: transparent;
 
+                    border: 1px solid ${({ theme }) => theme.colors.primaryColor};
+                    width:100%;
+                    font-size:16px;
+                    font-weight: 400;
+                    display:flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding:8px 12px;
+                    ${color}
+                     ${space}
+`
 export const profile = styled.img`
 
 `
@@ -129,24 +157,32 @@ export const Dialog = styled.dialog`
     ${typography}
     ${overflow}
     ${width}
-    background-color:'white';
+  position: relative;
+  background-color:'white';
   border-radius:'10px';
   max-width: 50rem;
   padding: 2rem;
   border: 0;
   border-radius: 0.5rem;
-  position: relative;
-  box-shadow: hsl(0 0% 0% / 10%) 0 0 0.5rem 0.25rem;
+  /* height: 100%;
+  width: 100%; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+  z-index: 30;
+  box-shadow: hsl(0 0% 0% / 10%) 0 0 0.5rem 0.25rem;
+ 
   &::backdrop {
-    background: hsl(0 0% 0% / 50%);
+    background: hsl(0 0% 0% / 50%) !important;
   }
 `
 
 export const Box = styled("div")(
   {
     display: "flex",
-    position: 'relative'
+    position: 'relative',
+    transition: 'all 0.3s ease',
   },
   flexbox,
   space,
@@ -160,8 +196,23 @@ export const Box = styled("div")(
   width,
   overflow
 );
-const SideBarContainer = styled.div`
-    
+export const SideBarContainer = styled.div`
+
+  ${flexbox}
+  ${space}
+  ${color}
+  ${border}
+  ${layout}
+  ${position}
+  ${shadow}
+  ${background}
+  ${opacity}
+  ${width}
+  ${overflow}
+  display: flex;
+  position: relative;
+  width: ${props => props.close ? "88px" : "250px"};
+transition: all 0.5s ease;
 `
 export const AnimationBox = styled("div")(
   {
@@ -206,20 +257,22 @@ export const Input = styled.input`
   ${typography}
   ${color}
   background-color: transparent;
-  font-size: 20px;
-  border-radius: 10px;
+  font-size: 16px;
+  /* border-radius: 10px; */
   width:100%;
   min-height: 30px;
   padding: 10px 5px 10px 20px;
   letter-spacing: .5px;
   font-family: 'Poppins, sans-serif';
-  border: 2px solid #b0b0ac;;
-  /* border-bottom: 2px solid #f0f0f0;  */
+  color: rgba(0, 0, 0,0.75);
+  /* border: 1px solid #64636324; */
+  border:none;
+  border-bottom: 1px solid rgb(0,0,0);
   &:valid {
-    border-color: #636364; }
+    border-color: #000; }
   &:focus {
     outline: none;
-    border-color: #b0b0ac; }
+    border-color: #000; }
  
   
 
@@ -230,11 +283,11 @@ export const Input = styled.input`
     border: 2px solid black;
   } */
   ::placeholder {
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
   }
   @media screen and (min-width: 40em){
     font-size: 1.3rem;
-    padding: 16px;
+    padding: 10px;
   }
   
 `;
@@ -294,33 +347,80 @@ export const GridContainer = styled.div`
     grid-template-columns: 60% 40%; // Change the number of columns for smaller screens if needed
   }
 `
-export const FlexNavLink = styled(NavLink)(
-  {
-    position: 'relative',
-    display: "flex",
-    justifyContent: "start",
-    alignItems: "center",
-    textDecoration: "none",
-    textTransform: "capitalize",
-    fontFamily: "Nunito",
-    fontSize: "1.2rem",
-    fontWeight: "500",
-    padding: '0.2rem 1rem',
-    color: "#2B2D42",
-    "&:hover": {
-      color: "#EF233C",
-    },
-    "&active": {
-      color: "#fff"
-    }
-  },
+// export const FlexNavLink = styled.NavLink(
+//   {
+//     position: 'relative',
+//     display: "flex",
+//     // justifyContent: "start",
+//     alignItems: "center",
+//     textDecoration: "none",
+//     height: "50px",
+//     marginTop: "10px",
+//     fontSize: "16px",
+//     fontWeight: "500",
+//     borderRadius: "5px",
+//     color: "#707070",
+//     transition: "all 0.3s ease",
+//     "&:hover": {
+//       backgroundColor: "primaryColor",
+//       color: "sideBarColor",
+//     },
+//     "&active": {
+//       color: "#fff"
+//     }
+//   },
 
-  flexbox,
-  space,
-  fontSize,
-  fontWeight,
-  display
-);
+//   flexbox,
+//   space,
+//   fontSize,
+//   fontWeight,
+//   display,
+
+// );
+// FlexNavLink.defaultProps = {
+//   color: props => props.theme.primaryColor
+// }
+export const FlexNavLink = styled(NavLink)`
+  position: relative;
+  display: flex;
+  /* justify-ontent: center; */
+  align-items: center;
+  text-decoration: none;
+  height: 50px;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 5px;
+  color: #707070;
+  transition: all 0.3s ease;
+ &:hover {
+  background-color: ${({ theme }) => theme.colors.primaryColor};
+  color: ${({ theme }) => theme.colors.sideBarColor};
+}
+
+`;
+export const List = styled.li`
+list-style: none;
+  position: relative;
+  display: flex;
+  /* justify-ontent: center; */
+  align-items: center;
+  text-decoration: none;
+  height: 50px;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 6px;
+  color: #707070;
+  transition: all 0.3s ease;
+ &:hover {
+  background-color: ${({ theme }) => theme.colors.primaryColor};
+  color: ${({ theme }) => theme.colors.sideBarColor};
+}
+
+
+`
+
 export const NavLinkButton = styled(NavLink)(
   {
     fontSize: '1.2rem',
@@ -341,10 +441,10 @@ export const NavLinkButton = styled(NavLink)(
     fontWeight,
     display,
 
-    // "&:active": {
-    //   color: "white",
-    //   
-    // },
+    "&:active": {
+      color: "white",
+
+    },
 
 
   })
@@ -355,7 +455,11 @@ export const Typography = styled.span`
     ${space}
     ${typography}
     ${color}
-    padding: 10px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+opacity: ${ props => props.close ? 0 : 1};
+color: ${({ theme }) => theme.colors.textColor};
+
 `;
 export const FlexBetween = styled(Box)({
   display: 'flex',
@@ -363,7 +467,7 @@ export const FlexBetween = styled(Box)({
   alignContent: 'center',
 })
 export const Label = styled.label`
-  font-size: 22px;
+font-size: 16px;
   font-weight: 400;
   color: #2a2826;
   text-align: start;
@@ -390,8 +494,12 @@ export const Search = styled.input`
   ${layout}
   ${typography}
   ${color}
+  border: none;
   outline: none;
-  font-size: 1.1rem;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
   position: relative;
   :focus {
     color: black;

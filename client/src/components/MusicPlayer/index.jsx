@@ -55,7 +55,7 @@ const MusicPlayer = () => {
   };
 
   return (
-    <Box position='relative' width='full' alignItems='center' flexDirection={['row', 'column']}>
+    <Box position='relative' width='full' alignItems='center' bg="gray" p={1}>
       <Track isPlaying={isPlaying} isActive={isActive} activeSong={activeSong} />
       <Box flexDirection='column' width='full'>
         <Controls

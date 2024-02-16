@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Button, Form, Heading, Input, Label, P } from '../../components/Styles'
+import { ActionButton, Box, Button, Form, Heading, Input, Label, P } from '../../components/Styles'
 
 import { Link, useNavigate } from 'react-router-dom';
 import { registerUser, setUserLogin } from '../../redux/features/user';
@@ -19,13 +19,13 @@ const FormPage = () => {
 
 
 
-    useEffect(() => {
-        if (error) {
-            setTimeout(() => {
-                setError('');
-            }, 5000);
-        }
-    }, [error])
+    // useEffect(() => {
+    //     if (error) {
+    //         setTimeout(() => {
+    //             setError('');
+    //         }, 5000);
+    //     }
+    // }, [error])
 
     const handleRegister = async (e) => {
         e.preventDefault()
@@ -54,13 +54,16 @@ const FormPage = () => {
 
 
     return (
-        <Form width={['340px', '80%', '70%']}
+        <Form width={['100%', '80%', '100%']}
+            bg="#fff"
+            padding="10px 20px"
             height={['full', "auto"]}
             alignItems='center'
             justifyContent='center'
             onSubmit={handleRegister}>
-            <Heading textAlign='start' fontFamily='Poppins,open-sans' fontSize='40px' fontWeight='400'>WELCOME BACK</Heading>
-            <P color='#636364' fontSize={['14px', '18px']}>Welcome back! Please enter your details.</P>
+            <Heading textAlign='start' fontSize='40px' fontWeight='400'>WELCOME BACK</Heading>
+            <P color='#636364' fontSize={['14px', '18px']}>Register Here.</P>
+            <Box gap="1rem" justifyContent="space-between">
             <Box flexDirection="column" width='full'>
                     <Label htmlFor="title" py={2} >
                         Full Name
@@ -72,7 +75,6 @@ const FormPage = () => {
                         onChange={(e) => setName(e.target.value)}
                     />
                 </Box>
-
             <Box flexDirection="column" width='full' >
                 <Label htmlFor="email" py={2}>
                     Email
@@ -85,6 +87,9 @@ const FormPage = () => {
                     onChange={(e) => setEmail(e.target.value)}
                 />
             </Box>
+            </Box>
+
+
             <Box flexDirection="column" width='full'>
                 <Label htmlFor="password" py={2}>
                     password
@@ -99,12 +104,13 @@ const FormPage = () => {
             </Box>
 
             <Box flexDirection="column" width='full' >
-                        <Label htmlFor="title" py={2}>
+                <Label htmlFor="confirmpassword" py={2}>
                             confirm password
                         </Label>
                         <Input
                             type="password"
                             placeholder="confirm password"
+                    id="confirmpassword"
                     autoComplete="none"
 
                             value={confirmPassword}
@@ -122,18 +128,11 @@ const FormPage = () => {
                         />
             </Box>
 
-            <Box justifyContent='center' alignItems='center' marginTop={3}>
-                <Button
-                    px={5}
+            <Box justifyContent='center' alignItems='center' marginTop={3} width="full">
+                <ActionButton
+
                     type="submit"
-                    py={3}
-                    width={["full"]}
-                    borderRadius={'12px'}
-                    alignItems="center"
-                    justifyContent="center"
-                    fontSize={["1.2rem", "1.4rem"]}
-                    border="none"
-                    outline="none"
+
                     bg="#EF233C"
                     color="white"
                     disabled={isLoading}
@@ -141,7 +140,7 @@ const FormPage = () => {
 
                 >
                     {isLoading ? '' : 'Register'}
-                </Button>
+                </ActionButton>
             </Box>
             <P
                 fontSize={"1.1rem"}

@@ -5,7 +5,7 @@ router.get("/", async (req, res) => {
   const { authorization } = req.headers;
 
   if (!authorization || !authorization?.startsWith("Bearer")) {
-    res.status(500).json({ message: "there was an error" });
+    res.status(500).json({ message: "There Was an Error"});
   }
   const token = authorization?.split(" ")[1];
   try {

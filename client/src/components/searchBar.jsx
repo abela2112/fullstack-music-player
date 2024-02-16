@@ -10,25 +10,30 @@ const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState()
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate(`/home/search/${searchTerm}`)
+    navigate(`/search/${searchTerm}`)
   }
   return (
-    <Form flexDirection={'row'} width={'auto'} position='relative' alignItems='center' mx={2} onSubmit={handleSubmit}>
+    <Form flexDirection={'row'} width={'auto'} position='relative' alignItems='center' onSubmit={handleSubmit}>
       <Box
-        display='flex'
-        alignItems='center'
+        display="flex"
+        alignItems="center"
+        marginTop="10px"
+        borderRadius={'6px'}
+        color='#707070'
+        border="none"
+        height="50px"
+        bg="primaryLight"
 
-        borderRadius={'10px'} color='gray'
-        border={"1px solid gray"}
-        padding="2px"
-        bg="#E8ECEF"
 
       >
-        <AiOutlineSearch size={30} />
+        <AiOutlineSearch className='icon' />
       <Search
+          bg="primaryLight"
+
+          type='search'
         value={searchTerm}
         onChange={(e) => { setSearchTerm(e.target.value) }}
-          placeholder='Search...' width={'full'} autoComplete='none' fontSize={'1.1rem'} padding={'0.5rem 2rem 0.75rem 0'} border='none' flex={2} bg="#E8ECEF" />
+          placeholder='Search...' width={'full'} autoComplete='none' fontSize={'1.1rem'} border='none' />
 
       </Box></Form>
   )

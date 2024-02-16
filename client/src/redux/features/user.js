@@ -6,12 +6,16 @@ const initialState = {
   isLoading: false,
   errorMessage: "",
   successMessage: "",
+  theme: "dark",
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    setTheme: (state) => {
+      state.theme = state.theme === "light" ? "dark" : "light";
+    },
     setUserLogin: (state) => {
       state.isLoading = true;
       state.errorMessage = "";
@@ -97,6 +101,7 @@ export const {
   setUserLoginError,
   registerUserSuccess,
   registerUserError,
+  setTheme,
 } = userSlice.actions;
 
 export default userSlice.reducer;
